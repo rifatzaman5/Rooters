@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Green Lantern Theme - Clean White Background with Emerald Green */
+    --background: 0 0% 100%;
+    --foreground: 142 76% 15%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 142 76% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 142 76% 15%;
+    
+    /* Primary: Emerald Green (Green Lantern's power color) */
+    --primary: 142 76% 36%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Dark Green */
+    --secondary: 142 76% 20%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Muted: Light Gray */
+    --muted: 0 0% 96%;
+    --muted-foreground: 142 76% 25%;
+    
+    /* Accent: Bright Emerald (for CTAs and highlights) */
+    --accent: 142 76% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 142 76% 36%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode: Black background with emerald accents */
+    --background: 0 0% 3%;
+    --foreground: 142 76% 65%;
+    
+    --card: 0 0% 6%;
+    --card-foreground: 142 76% 65%;
+    
+    --popover: 0 0% 6%;
+    --popover-foreground: 142 76% 65%;
+    
+    --primary: 142 76% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 142 76% 30%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 142 76% 55%;
+    
+    --accent: 142 76% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 142 76% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
