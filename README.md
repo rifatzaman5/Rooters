@@ -39,12 +39,14 @@ A modern Next.js 16+ website built with TypeScript, Shadcn UI, and Sanity CMS.
 ## Getting Started
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Set up environment variables**:
    Copy `.env.example` to `.env.local` and fill in your Sanity credentials:
+
    ```env
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
@@ -54,6 +56,7 @@ A modern Next.js 16+ website built with TypeScript, Shadcn UI, and Sanity CMS.
    ```
 
 3. **Run the development server**:
+
    ```bash
    npm run dev
    ```
@@ -64,6 +67,7 @@ A modern Next.js 16+ website built with TypeScript, Shadcn UI, and Sanity CMS.
 ## Adding Shadcn Components
 
 Use the Shadcn CLI to add components:
+
 ```bash
 npx shadcn@latest add [component-name]
 ```
@@ -88,4 +92,3 @@ See `.cursor/rules/project-rules-for-ai/RULE.md` for complete guidelines.
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-
