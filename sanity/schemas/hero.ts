@@ -22,12 +22,14 @@ export default defineType({
       name: 'heading',
       title: 'Heading',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().min(5).max(100),
+      description: 'Main headline for the hero section',
     }),
     defineField({
       name: 'subheading',
-      title: 'Subheading',
+      title: 'Subheading (Badge)',
       type: 'string',
+      description: 'The small pill/badge text above the heading',
     }),
     defineField({
       name: 'paragraph',
@@ -51,18 +53,45 @@ export default defineType({
         },
       ],
     }),
+    
+    // --- PRIMARY BUTTON ---
     defineField({
       name: 'ctaText',
-      title: 'CTA Button Text',
-      type: 'string',
-      initialValue: 'Call Us Now',
+      title: 'Primary Button Text',
+      type: 'string', // ✅ Fixed: Added type
+      initialValue: 'Get a Quote',
     }),
     defineField({
       name: 'ctaLink',
-      title: 'CTA Link',
-      type: 'string',
-      description: 'Phone number (tel:+1234567890) or URL',
-      initialValue: 'tel:+1234567890',
+      title: 'Primary Button Link',
+      type: 'string', // ✅ Fixed: Added type
+      description: 'URL (e.g., /contact) or Phone (tel:+123...)',
+      initialValue: '/contact',
+    }),
+
+    // --- SECONDARY BUTTON (New) ---
+    defineField({
+      name: 'secondCtaText',
+      title: 'Secondary Button Text',
+      type: 'string', // ✅ Fixed: Added type
+      description: 'Optional: Text for the outline button (e.g. "Contact Support")',
+      initialValue: 'Contact Support'
+    }),
+    defineField({
+      name: 'secondCtaLink',
+      title: 'Secondary Button Link',
+      type: 'string', // ✅ Fixed: Added type
+      description: 'Optional: Link for the outline button',
+      initialValue: '/contact'
+    }),
+
+    // --- SOCIAL PROOF (New) ---
+    defineField({
+      name: 'socialProofText',
+      title: 'Social Proof Text',
+      type: 'string', // ✅ Fixed: Added type
+      description: 'Text shown next to stars (e.g. "Trusted by 500+ locals")',
+      initialValue: 'Trusted by 500+ locals'
     }),
   ],
   preview: {
@@ -80,4 +109,3 @@ export default defineType({
     },
   },
 })
-

@@ -21,10 +21,26 @@ export default defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
+    
+    // Hero Section
     defineField({
       name: 'hero',
       title: 'Hero Section',
       type: 'hero',
+    }),
+
+    // About Us Section
+    defineField({
+      name: 'aboutUs',
+      title: 'About Us Section',
+      type: 'aboutUs',
+    }),
+
+    // 👇 THIS IS WHAT WAS MISSING 👇
+    defineField({
+      name: 'pricing',
+      title: 'Pricing Section',
+      type: 'pricing',
     }),
   ],
   preview: {
@@ -34,4 +50,3 @@ export default defineType({
     },
   },
 })
-
