@@ -26,7 +26,7 @@ export default function AboutUs({ data, className }: AboutUsProps) {
   const { heading, subheading, description, image, features, ctaText, ctaLink } = data
 
   return (
-    <section className={cn('relative w-full py-20 md:py-32 bg-background overflow-hidden', className)}>
+    <section className={cn('relative w-full pt-20 pb-20 md:pt-0 md:pb-32 bg-background overflow-hidden', className)}>
       {/* Subtle Background Pattern */}
       <div className="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent opacity-50 pointer-events-none" />
 
@@ -36,7 +36,7 @@ export default function AboutUs({ data, className }: AboutUsProps) {
           {/* Left Side - Image Composition */}
           <div className="relative group animate-in fade-in slide-in-from-bottom-8 duration-700">
             {/* Back decorative border */}
-            <div className="absolute top-4 left-4 w-full h-full border-2 border-primary/20 rounded-2xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
+            <div className="absolute top-4 left-4 w-full h-full border-2 border-primary/20 rounded-2xl z-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
             
             {/* Main Image Container */}
             <div className="relative aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden shadow-2xl border border-border bg-muted">
@@ -56,7 +56,7 @@ export default function AboutUs({ data, className }: AboutUsProps) {
             </div>
 
             {/* Floating Badge (Optional decorative touch using generic icon) */}
-            <div className="absolute -bottom-6 -right-6 lg:bottom-10 lg:-right-10 bg-background p-4 rounded-xl shadow-xl border border-border flex items-center gap-3 animate-in zoom-in delay-300 duration-500">
+            <div className="absolute -bottom-6 -right-2 lg:bottom-10 lg:-right-10 bg-background p-4 rounded-xl shadow-xl border border-border flex items-center gap-3 animate-in zoom-in delay-300 duration-500">
               <div className="bg-primary/10 p-2.5 rounded-full text-primary">
                 <Star className="w-6 h-6 fill-current" />
               </div>

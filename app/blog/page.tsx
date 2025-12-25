@@ -6,28 +6,34 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { client } from '@/lib/sanity/client'
-import { postsQuery } from '@/lib/sanity/queries'
+import { blogPageDataQuery } from '@/lib/sanity/queries'
 import { urlFor } from '@/lib/sanity/image'
-import type { Post } from '@/types/sanity'
+import Hero from '@/components/Hero'
 
 export const revalidate = 60
 
 export default async function BlogPage() {
-  const posts: Post[] = await client.fetch(postsQuery)
+  // Fetch Page info AND Posts in one go
+  const { page, posts } = await client.fetch(blogPageDataQuery)
 
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
       
-      <div className="flex-1 container mx-auto px-4 pt-32 pb-20">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">Latest Insights</h1>
-          <p className="text-xl text-muted-foreground">Tips, tricks, and news from your local infrastructure experts.</p>
+      {/* Optional: Use the Hero from Sanity if you filled it out on the Blog page */}
+      {page?.hero ? (
+        <Hero data={page.hero} />
+      ) : (
+        <div className="container mx-auto px-4 pt-32 pb-10 text-center">
+             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">Latest Insights</h1>
+             <p className="text-xl text-muted-foreground">Updates from the team.</p>
         </div>
-
-        {posts.length > 0 ? (
+      )}
+      
+      <div className="flex-1 container mx-auto px-4 pb-20 pt-10">
+        {posts && posts.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
+            {posts.map((post: any) => (
               <Card key={post._id} className="group flex flex-col overflow-hidden border-border/60 hover:border-primary/50 transition-all hover:shadow-lg">
                 <div className="relative h-60 w-full bg-muted overflow-hidden">
                   {post.mainImage ? (
@@ -74,10 +80,8 @@ export default async function BlogPage() {
             ))}
           </div>
         ) : (
-          // This shows if you haven't created any posts in Sanity yet
-          <div className="flex flex-col items-center justify-center py-20 text-center space-y-4 bg-muted/30 rounded-2xl border border-dashed border-muted-foreground/25">
-            <p className="text-xl font-semibold text-muted-foreground">No articles found yet.</p>
-            <p className="text-muted-foreground">Go to Sanity Studio to add your first blog post!</p>
+          <div className="text-center py-20 bg-muted/30 rounded-xl">
+            <p className="text-xl text-muted-foreground">No blog posts found.</p>
           </div>
         )}
       </div>

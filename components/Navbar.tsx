@@ -18,6 +18,7 @@ import { Menu, X } from "lucide-react"
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+
   const pathname = usePathname()
   const isHome = pathname === "/"
 
@@ -27,7 +28,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Close mobile menu when route changes
   React.useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
@@ -63,13 +63,14 @@ export default function Navbar() {
                   <NavigationMenuTrigger className="bg-transparent hover:bg-primary/10 data-[active]:bg-primary/10">
                     Services
                   </NavigationMenuTrigger>
+
                   <NavigationMenuContent>
                     <ul className="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px] lg:grid-cols-2">
                       <li className="row-span-4">
                         <NavigationMenuLink asChild>
                           <Link
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-primary/80 to-primary p-6 no-underline outline-none focus:shadow-md"
                             href="/services"
+                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-primary/80 to-primary p-6 no-underline outline-none focus:shadow-md"
                           >
                             <div className="mt-4 mb-2 text-lg font-medium text-white">
                               Green Energy
@@ -80,42 +81,65 @@ export default function Navbar() {
                           </Link>
                         </NavigationMenuLink>
                       </li>
-                      <ListItem href="/services/plumbing-repair" title="Plumbing Repair">
+
+                      <ListItem
+                        href="/services/plumbing-repair"
+                        title="Plumbing Repair"
+                      >
                         24/7 Repairs & Maintenance
                       </ListItem>
-                      <ListItem href="/services/heating-systems" title="Heating Systems">
+
+                      <ListItem
+                        href="/services/heating-systems"
+                        title="Heating Systems"
+                      >
                         Furnace Install & Eco-Solutions
                       </ListItem>
-                      <ListItem href="/services/ac-and-cooling" title="AC & Cooling">
+
+                      <ListItem
+                        href="/services/ac-and-cooling"
+                        title="AC & Cooling"
+                      >
                         Installation & Emergency Repair
                       </ListItem>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* About */}
                 <NavigationMenuItem>
-                  <Link href="/about" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50")}>
-                      About
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink
+                    asChild
+                    className={cn(
+                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    )}
+                  >
+                    <Link href="/about">About</Link>
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
 
-                {/* ADDED BLOG LINK HERE */}
+                {/* Blog */}
                 <NavigationMenuItem>
-                  <Link href="/blog" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50")}>
-                      Blog
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink
+                    asChild
+                    className={cn(
+                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    )}
+                  >
+                    <Link href="/blog">Blog</Link>
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
 
+                {/* Contact */}
                 <NavigationMenuItem>
-                  <Link href="/contact" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50")}>
-                      Contact
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink
+                    asChild
+                    className={cn(
+                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                    )}
+                  >
+                    <Link href="/contact">Contact</Link>
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -138,18 +162,29 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <div
         className={cn(
           "fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col pt-32 px-6 transition-all duration-300 ease-in-out md:hidden",
-          isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"
+          isMobileMenuOpen
+            ? "opacity-100 translate-x-0"
+            : "opacity-0 translate-x-full pointer-events-none"
         )}
       >
         <div className="flex flex-col gap-6 text-lg font-medium">
-          <Link href="/services" className="border-b pb-4">Services</Link>
-          <Link href="/about" className="border-b pb-4">About</Link>
-          <Link href="/blog" className="border-b pb-4">Blog</Link>
-          <Link href="/contact" className="border-b pb-4">Contact</Link>
+          <Link href="/services" className="border-b pb-4">
+            Services
+          </Link>
+          <Link href="/about" className="border-b pb-4">
+            About
+          </Link>
+          <Link href="/blog" className="border-b pb-4">
+            Blog
+          </Link>
+          <Link href="/contact" className="border-b pb-4">
+            Contact
+          </Link>
+
           <Button asChild size="lg" className="mt-4 w-full">
             <Link href="/contact">Get a Quote</Link>
           </Button>
@@ -183,4 +218,5 @@ const ListItem = React.forwardRef<
     </li>
   )
 })
+
 ListItem.displayName = "ListItem"

@@ -1,105 +1,120 @@
-import { defineField, defineType } from 'sanity'
+import { defineField, defineType } from "sanity"
 
 export default defineType({
-  name: 'aboutUs',
-  title: 'About Us Section',
-  type: 'object',
+  name: "aboutUs",
+  title: "About Us Section",
+  type: "object",
   fields: [
     defineField({
-      name: 'heading',
-      title: 'Heading',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-      initialValue: 'About Us',
+      name: "heading",
+      title: "Heading",
+      type: "string",
+      // ✅ Only required on home/about
+      validation: (Rule) =>
+        Rule.custom((value, ctx) => {
+          const slug = (ctx as any)?.document?.slug?.current
+          const mustHave = slug === "home" || slug === "about"
+          if (!mustHave) return true
+          return value ? true : "Heading is required on this page."
+        }),
+      // ❌ remove initialValue to prevent auto-creating this object on FAQ pages
     }),
+
     defineField({
-      name: 'subheading',
-      title: 'Subheading',
-      type: 'string',
-      description: 'A short tagline or subtitle',
+      name: "subheading",
+      title: "Subheading",
+      type: "string",
+      description: "A short tagline or subtitle",
     }),
+
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+      name: "description",
+      title: "Description",
+      type: "text",
       rows: 5,
-      validation: (Rule) => Rule.required(),
+      // ✅ Only required on home/about
+      validation: (Rule) =>
+        Rule.custom((value, ctx) => {
+          const slug = (ctx as any)?.document?.slug?.current
+          const mustHave = slug === "home" || slug === "about"
+          if (!mustHave) return true
+          return value ? true : "Description is required on this page."
+        }),
     }),
+
     defineField({
-      name: 'image',
-      title: 'About Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      name: "image",
+      title: "About Image",
+      type: "image",
+      options: { hotspot: true },
       fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alt Text',
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alt Text",
           validation: (Rule) => Rule.required(),
-        },
+        }),
       ],
     }),
+
     defineField({
-      name: 'features',
-      title: 'Key Features',
-      type: 'array',
+      name: "features",
+      title: "Key Features",
+      type: "array",
       of: [
         {
-          type: 'object',
-          name: 'feature',
+          type: "object",
+          name: "feature",
           fields: [
             defineField({
-              name: 'title',
-              title: 'Feature Title',
-              type: 'string',
+              name: "title",
+              title: "Feature Title",
+              type: "string",
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: 'description',
-              title: 'Feature Description',
-              type: 'text',
+              name: "description",
+              title: "Feature Description",
+              type: "text",
               rows: 2,
             }),
             defineField({
-              name: 'icon',
-              title: 'Icon Name',
-              type: 'string',
+              name: "icon",
+              title: "Icon Name",
+              type: "string",
               description: 'Lucide icon name (e.g., "Shield", "Clock", "Award")',
             }),
           ],
           preview: {
-            select: {
-              title: 'title',
-              subtitle: 'description',
-            },
+            select: { title: "title", subtitle: "description" },
           },
         },
       ],
     }),
+
     defineField({
-      name: 'ctaText',
-      title: 'CTA Button Text',
-      type: 'string',
-      initialValue: 'Learn More',
+      name: "ctaText",
+      title: "CTA Button Text",
+      type: "string",
+      // ❌ remove initialValue (optional but recommended)
     }),
+
     defineField({
-      name: 'ctaLink',
-      title: 'CTA Link',
-      type: 'string',
-      initialValue: '/about',
+      name: "ctaLink",
+      title: "CTA Link",
+      type: "string",
+      // ❌ remove initialValue (optional but recommended)
     }),
   ],
   preview: {
     select: {
-      title: 'heading',
-      media: 'image',
+      title: "heading",
+      media: "image",
     },
     prepare({ title, media }) {
       return {
-        title: title || 'About Us Section',
-        subtitle: 'About Us',
+        title: title || "About Us Section",
+        subtitle: "About Us",
         media,
       }
     },

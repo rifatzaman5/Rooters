@@ -2,25 +2,50 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CustomPortableText from '@/components/CustomPortableText'
 import { client } from '@/lib/sanity/client'
-import { legalQuery } from '@/lib/sanity/queries'
-import type { LegalPage } from '@/types/sanity'
+import { legalPageQuery } from '@/lib/sanity/queries'
 
 export const revalidate = 60
 
 export default async function PrivacyPage() {
-  const data: LegalPage = await client.fetch(legalQuery, { slug: 'privacy-policy' })
-  if (!data) return <div className="pt-32 text-center">Page not found in Sanity (slug: privacy-policy)</div>
+  // Fetch "Page" document with slug "privacy-policy"
+  const data = await client.fetch(legalPageQuery, { slug: 'privacy-policy' })
+
+  if (!data) {
+    return (
+      <main className="min-h-screen bg-background flex flex-col">
+        <Navbar />
+        <div className="flex-1 container pt-40 pb-20 text-center">
+          <h1 className="text-2xl font-bold">Page Not Found</h1>
+          <p className="text-muted-foreground mt-2">
+            Please create a Page in Sanity with slug <strong>"privacy-policy"</strong>.
+          </p>
+        </div>
+        <Footer />
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
+      
       <div className="flex-1 container mx-auto px-4 pt-32 pb-20 max-w-3xl">
         <div className="border-b pb-8 mb-10">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">{data.title}</h1>
-          {data.lastUpdated && <p className="text-sm text-muted-foreground">Last Updated: {new Date(data.lastUpdated).toLocaleDateString()}</p>}
+          <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+            {data.content?.heading || data.title}
+          </h1>
+          {data.content?.lastUpdated && (
+            <p className="text-sm text-muted-foreground uppercase tracking-wide">
+              Last Updated: {new Date(data.content.lastUpdated).toLocaleDateString()}
+            </p>
+          )}
         </div>
-        <CustomPortableText value={data.content} />
+
+        {data.content?.body && (
+          <CustomPortableText value={data.content.body} />
+        )}
       </div>
+
       <Footer />
     </main>
   )

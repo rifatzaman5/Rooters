@@ -131,7 +131,7 @@ export default function Hero({ data, className }: HeroProps) {
                 <div className="relative aspect-[4/3] lg:aspect-square w-full">
                   
                   {/* Decorative blobs behind image */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl opacity-60 -z-10" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/20 to-transparent rounded-full blur-3xl opacity-60 z-1" />
 
                   {/* Main Image */}
                   <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-border/50 shadow-2xl bg-muted">
