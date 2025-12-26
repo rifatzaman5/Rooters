@@ -255,6 +255,16 @@ export const singleServiceQuery = `
     title,
     shortDescription,
     mainImage,
+    intro,
+    highlights,
+    benefits[] {
+      title,
+      description
+    },
+    serviceFaq[] {
+      question,
+      answer
+    },
     content
   }
 `

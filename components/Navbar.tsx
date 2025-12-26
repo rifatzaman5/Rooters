@@ -13,12 +13,12 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
-
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = React.useState(false)
   const pathname = usePathname()
   const isHome = pathname === "/"
 
@@ -28,195 +28,350 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+
+    return () => {
+      document.body.style.overflow = "unset"
+    }
+  }, [isMobileMenuOpen])
+
+  // Close menu on route change
   React.useEffect(() => {
     setIsMobileMenuOpen(false)
+    setIsMobileServicesOpen(false)
   }, [pathname])
 
   const isHomeTop = isHome && !isScrolled
 
+  const navbarClasses = cn(
+    "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b",
+    isHomeTop && "bg-background/60 backdrop-blur-md border-primary/15",
+    isScrolled && "bg-background/85 backdrop-blur-md border-primary/25 shadow-md",
+    !isHome && "bg-background border-border"
+  )
+
+  const textColorClass = "text-foreground"
+
+  const navLinkClass = (href: string) => {
+    const isActive =
+      pathname === href || (href !== "/" && pathname?.startsWith(href + "/"))
+
+    const base =
+      "inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors " +
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+
+    const homeTopHover = "hover:bg-primary/10 hover:text-foreground"
+    const defaultHover = "hover:text-primary"
+
+    const activeStyle = isHomeTop
+      ? "bg-primary/10 text-foreground"
+      : "text-primary"
+
+    return cn(
+      base,
+      textColorClass,
+      isHomeTop ? homeTopHover : defaultHover,
+      isActive && activeStyle
+    )
+  }
+
+  const triggerClass = cn(
+    "bg-transparent",
+    isHomeTop
+      ? "hover:bg-primary/10 hover:text-foreground focus:bg-primary/10 focus:text-foreground"
+      : "hover:text-primary focus:text-primary"
+  )
+
+  const services = [
+    {
+      title: "Plumbing Repair",
+      href: "/services/plumbing-repair",
+      description: "24/7 Repairs & Maintenance"
+    },
+    {
+      title: "Heating Systems",
+      href: "/services/heating-systems",
+      description: "Furnace Install & Eco-Solutions"
+    },
+    {
+      title: "AC & Cooling",
+      href: "/services/ac-and-cooling",
+      description: "Installation & Emergency Repair"
+    },
+    {
+      title: "Drain Cleaning",
+      href: "/services/drain-cleaning",
+      description: "Hydro-jetting & Clog Removal"
+    }
+  ]
+
+  const isActiveMobile = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/")
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+    setIsMobileServicesOpen(false)
+  }
+
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b",
-        isHomeTop
-          ? "bg-background/60 backdrop-blur-md border-transparent"
-          : "bg-background/95 backdrop-blur-md border-border shadow-sm"
-      )}
-    >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 z-50">
-            <div className="h-9 w-9 rounded-full border-2 border-primary flex items-center justify-center bg-primary/10">
-              <div className="h-4 w-4 rounded-full bg-primary" />
+    <>
+      <nav className={navbarClasses}>
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 group relative z-50">
+              <div className="h-8 w-8 rounded-full border-2 border-primary flex items-center justify-center">
+                <div className="h-4 w-4 rounded-full bg-primary" />
+              </div>
+              <span
+                className={cn(
+                  "font-heading font-bold text-xl tracking-tight",
+                  textColorClass
+                )}
+              >
+                Rooters
+              </span>
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:block">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {/* Services Dropdown */}
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={triggerClass}>
+                      Services
+                    </NavigationMenuTrigger>
+
+                    <NavigationMenuContent>
+                      <ul className="grid gap-2 p-4 w-[450px] md:w-[550px]">
+                        {/* View All Services - Highlighted */}
+                        <li className="mb-2">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href="/services"
+                              className="flex items-center justify-between w-full select-none rounded-lg bg-primary/5 border border-primary/20 p-4 no-underline outline-none transition-all hover:bg-primary/10 hover:border-primary/30 group"
+                            >
+                              <div>
+                                <div className="text-base font-semibold text-foreground mb-1">
+                                  View All Services
+                                </div>
+                                <p className="text-sm text-muted-foreground">
+                                  Explore our complete range of solutions
+                                </p>
+                              </div>
+                              <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+
+                        {/* Divider */}
+                        <div className="border-t border-border my-1" />
+
+                        {/* Service Items Grid */}
+                        <div className="grid grid-cols-2 gap-2">
+                          {services.map((service) => (
+                            <li key={service.href}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={service.href}
+                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                >
+                                  <div className="text-sm font-medium leading-none">
+                                    {service.title}
+                                  </div>
+                                  <p className="line-clamp-2 text-xs leading-snug text-muted-foreground mt-1">
+                                    {service.description}
+                                  </p>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </div>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  {/* About */}
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link href="/about" className={navLinkClass("/about")}>
+                        About
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  {/* Blog */}
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link href="/blog" className={navLinkClass("/blog")}>
+                        Blog
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
+                  {/* Contact */}
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link href="/contact" className={navLinkClass("/contact")}>
+                        Contact
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </div>
-            <span className="font-heading font-bold text-xl tracking-tight text-foreground">
-              Rooters
-            </span>
-          </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:block">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:bg-primary/10 data-[active]:bg-primary/10">
-                    Services
-                  </NavigationMenuTrigger>
+            {/* CTA + Mobile toggle */}
+            <div className="flex items-center gap-4">
+              <Button asChild className="hidden md:inline-flex font-semibold">
+                <Link href="/contact">Get a Quote</Link>
+              </Button>
 
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 w-[400px] md:w-[500px] lg:w-[600px] lg:grid-cols-2">
-                      <li className="row-span-4">
-                        <NavigationMenuLink asChild>
+              <button
+                className="md:hidden p-2 relative z-50"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className={textColorClass} />
+                ) : (
+                  <Menu className={textColorClass} />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+
+          {/* Mobile Menu Panel */}
+          <div className="fixed top-16 left-0 right-0 bottom-0 z-40 md:hidden animate-in slide-in-from-top duration-300">
+            <div className=" bg-background border-r border-border shadow-2xl overflow-y-auto">
+              <div className="p-6 space-y-1">
+                {/* Services Accordion */}
+                <div className="border-b border-border pb-2">
+                  <button
+                    onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                    className={cn(
+                      "w-full flex items-center justify-between py-3 font-semibold text-left transition-colors rounded-md px-2",
+                      isActiveMobile("/services") ? "text-primary" : "text-foreground hover:text-primary hover:bg-accent"
+                    )}
+                  >
+                    <span>Services</span>
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform duration-200",
+                        isMobileServicesOpen && "rotate-180"
+                      )}
+                    />
+                  </button>
+
+                  {/* Services Submenu with Animation */}
+                  <div
+                    className={cn(
+                      "overflow-hidden transition-all duration-300 ease-in-out",
+                      isMobileServicesOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+                    )}
+                  >
+                    <div className="pb-3 pt-2 space-y-2">
+                      {/* View All Services */}
+                      <Link
+                        href="/services"
+                        onClick={closeMobileMenu}
+                        className="flex items-center justify-between w-full rounded-lg bg-primary/5 border border-primary/20 p-4 transition-all hover:bg-primary/10 active:scale-[0.98] group"
+                      >
+                        <div>
+                          <div className="text-sm font-semibold text-foreground">
+                            View All Services
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Explore complete range
+                          </p>
+                        </div>
+                        <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                      </Link>
+
+                      {/* Service Links */}
+                      <div className="space-y-1 pt-1">
+                        {services.map((service) => (
                           <Link
-                            href="/services"
-                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-primary/80 to-primary p-6 no-underline outline-none focus:shadow-md"
+                            key={service.href}
+                            href={service.href}
+                            onClick={closeMobileMenu}
+                            className="block rounded-lg p-3 hover:bg-accent active:bg-accent/80 transition-colors"
                           >
-                            <div className="mt-4 mb-2 text-lg font-medium text-white">
-                              Green Energy
+                            <div className="text-sm font-medium text-foreground">
+                              {service.title}
                             </div>
-                            <p className="text-sm leading-tight text-white/90">
-                              Sustainable solutions for modern infrastructure and eco-friendly plumbing.
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {service.description}
                             </p>
                           </Link>
-                        </NavigationMenuLink>
-                      </li>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                      <ListItem
-                        href="/services/plumbing-repair"
-                        title="Plumbing Repair"
-                      >
-                        24/7 Repairs & Maintenance
-                      </ListItem>
+                {/* Other Links */}
+                <Link
+                  href="/about"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/about") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                  )}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/blog"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/blog") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                  )}
+                >
+                  Blog
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/contact") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                  )}
+                >
+                  Contact
+                </Link>
 
-                      <ListItem
-                        href="/services/heating-systems"
-                        title="Heating Systems"
-                      >
-                        Furnace Install & Eco-Solutions
-                      </ListItem>
-
-                      <ListItem
-                        href="/services/ac-and-cooling"
-                        title="AC & Cooling"
-                      >
-                        Installation & Emergency Repair
-                      </ListItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-
-                {/* About */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    asChild
-                    className={cn(
-                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-                    )}
-                  >
-                    <Link href="/about">About</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                {/* Blog */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    asChild
-                    className={cn(
-                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-                    )}
-                  >
-                    <Link href="/blog">Blog</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                {/* Contact */}
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    asChild
-                    className={cn(
-                      "group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-                    )}
-                  >
-                    <Link href="/contact">Contact</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+                {/* Mobile CTA */}
+                <div className="pt-4">
+                  <Button asChild className="w-full" onClick={closeMobileMenu}>
+                    <Link href="/contact">Get a Quote</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
-
-          {/* CTA + Mobile toggle */}
-          <div className="flex items-center gap-4">
-            <Button asChild className="hidden md:inline-flex shadow-lg shadow-primary/20">
-              <Link href="/contact">Get a Quote</Link>
-            </Button>
-
-            <button
-              className="md:hidden p-2 text-foreground z-50"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X /> : <Menu />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          "fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col pt-32 px-6 transition-all duration-300 ease-in-out md:hidden",
-          isMobileMenuOpen
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 translate-x-full pointer-events-none"
-        )}
-      >
-        <div className="flex flex-col gap-6 text-lg font-medium">
-          <Link href="/services" className="border-b pb-4">
-            Services
-          </Link>
-          <Link href="/about" className="border-b pb-4">
-            About
-          </Link>
-          <Link href="/blog" className="border-b pb-4">
-            Blog
-          </Link>
-          <Link href="/contact" className="border-b pb-4">
-            Contact
-          </Link>
-
-          <Button asChild size="lg" className="mt-4 w-full">
-            <Link href="/contact">Get a Quote</Link>
-          </Button>
-        </div>
-      </div>
-    </nav>
+        </>
+      )}
+    </>
   )
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  )
-})
-
-ListItem.displayName = "ListItem"
