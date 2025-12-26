@@ -11,13 +11,12 @@ import {
   Linkedin,
   ArrowRight,
   Twitter,
-  Youtube
+  Youtube,
 } from "lucide-react"
 
 // Revalidate every minute
 export const revalidate = 60
 
-// Simple Icon Mapper
 function SocialIcon({ platform }: { platform: string }) {
   const p = platform.toLowerCase()
   if (p.includes("facebook")) return <Facebook className="w-5 h-5" />
@@ -50,184 +49,206 @@ export default async function Footer() {
   const contact = settings?.contact
   const socials = settings?.socials || []
 
-  // Show top 5 services, sorted alphabetically
   const topServices = (services || [])
     .slice()
     .sort((a, b) => a.title.localeCompare(b.title))
-    .slice(0, 5)
+    .slice(0, 6)
+
+  const copyrightText =
+    settings?.footerLegal || `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`
 
   return (
-    <footer className="relative bg-zinc-950 text-white overflow-hidden pt-16 md:pt-20">
-      
-      {/* --- Ambient Background Glows --- */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] pointer-events-none opacity-40" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[128px] pointer-events-none opacity-30" />
+    <footer className="relative overflow-visible bg-background mt-20 md:mt-24">
+      {/* Footer panel (rounded top corners) */}
+      <div className="relative bg-primary text-primary-foreground brightness-90 rounded-t-[2.5rem] md:rounded-t-[3rem]">
+        {/* CTA (overlapping, fully visible) */}
+        <div className="absolute left-0 right-0 -top-24 sm:-top-20 md:-top-28 z-30">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="mx-auto max-w-5xl rounded-3xl bg-background text-foreground border border-primary/20 shadow-2xl px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-9">
+              <div className="flex flex-col items-center text-center gap-4">
+                <h3 className="font-heading text-lg sm:text-2xl md:text-3xl font-bold leading-tight">
+                  Book a free consultation with our experts today.
+                </h3>
 
-      {/* --- Pre-Footer CTA --- */}
-      <div className="container mx-auto px-4 md:px-6 mb-16 md:mb-20">
-        <div className="relative rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-900/50 border border-white/10 p-8 md:p-12 overflow-hidden">
-          {/* Decorative pattern on CTA */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
-          
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left">
-            <div className="space-y-4 max-w-2xl">
-              <h3 className="font-heading text-3xl md:text-4xl font-bold leading-tight">
-                Emergency? We're here 24/7.
-              </h3>
-              <p className="text-zinc-400 text-lg">
-                Don't let a small leak become a big problem. Get a free quote online or call our emergency hotline now.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-               <Link
-                href="/contact"
-                className="inline-flex items-center justify-center h-14 px-8 rounded-full bg-primary text-primary-foreground font-bold hover:bg-primary/90 hover:scale-105 transition-all duration-300 shadow-lg shadow-primary/20"
-              >
-                Get a Quote <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <a
-                href={contact?.phoneHref || "tel:#"}
-                className="inline-flex items-center justify-center h-14 px-8 rounded-full border border-white/20 hover:bg-white/10 font-semibold transition-all duration-300"
-              >
-                <Phone className="w-5 h-5 mr-2" /> 
-                {contact?.phoneDisplay || "Call Support"}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+                <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
+                  Quick scheduling, transparent pricing, and professional service you can trust.
+                </p>
 
-      {/* --- Main Footer Content --- */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 pb-16 border-b border-white/10">
-          
-          {/* Column 1: Brand (Span 4) */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
-                <div className="h-4 w-4 rounded-full bg-white" />
-              </div>
-              <span className="text-2xl font-heading font-bold tracking-tight">
-                {brandName}
-              </span>
-            </div>
-            
-            <p className="text-zinc-400 leading-relaxed max-w-sm">
-              {brandDescription}
-            </p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-primary text-primary-foreground font-semibold
+                               hover:bg-primary/90 transition-colors w-full sm:w-auto"
+                  >
+                    Contact Us Now <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
 
-            {/* Socials */}
-            {socials.length > 0 && (
-              <div className="flex items-center gap-3 pt-2">
-                {socials.map((s, idx) => (
                   <a
-                    key={idx}
-                    href={s.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-primary hover:border-primary transition-all duration-300"
-                    aria-label={s.platform}
+                    href={contact?.phoneHref || "tel:#"}
+                    className="inline-flex items-center justify-center h-12 px-7 rounded-full border border-border
+                               bg-background hover:bg-muted transition-colors font-semibold w-full sm:w-auto"
                   >
-                    <SocialIcon platform={s.platform} />
+                    <Phone className="w-4 h-4 mr-2" />
+                    {contact?.phoneDisplay || "Call Support"}
                   </a>
-                ))}
+                </div>
               </div>
-            )}
+            </div>
           </div>
-
-          {/* Column 2: Quick Links (Span 2) */}
-          <div className="lg:col-span-2 lg:pl-4">
-            <h4 className="font-bold text-lg mb-6 text-white">Company</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((l, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={l.href}
-                    className="group inline-flex items-center text-zinc-400 hover:text-primary transition-colors"
-                  >
-                    <span className="w-0 overflow-hidden group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1 opacity-0 group-hover:opacity-100">›</span>
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Services (Span 3) */}
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-lg mb-6 text-white">Services</h4>
-            <ul className="space-y-3">
-              {topServices.map((s) => (
-                <li key={s._id}>
-                  <Link
-                    href={`/services/${s.slug.current}`}
-                    className="group inline-flex items-center text-zinc-400 hover:text-primary transition-colors"
-                  >
-                    <span className="w-0 overflow-hidden group-hover:w-2 transition-all duration-300 mr-0 group-hover:mr-1 opacity-0 group-hover:opacity-100">›</span>
-                    {s.title}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary/80 mt-2"
-                >
-                  View All <ArrowRight className="w-3 h-3" />
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Contact (Span 3) */}
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-lg mb-6 text-white">Contact Info</h4>
-            <ul className="space-y-4">
-              {(contact?.addressLine1 || contact?.addressLine2) && (
-                <li className="flex items-start gap-3 text-zinc-400">
-                  <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span>
-                    {contact?.addressLine1}
-                    {contact?.addressLine2 && <><br />{contact.addressLine2}</>}
-                  </span>
-                </li>
-              )}
-              
-              {contact?.email && (
-                <li className="flex items-center gap-3 text-zinc-400">
-                  <Mail className="w-5 h-5 text-primary shrink-0" />
-                  <a href={`mailto:${contact.email}`} className="hover:text-white transition-colors">
-                    {contact.email}
-                  </a>
-                </li>
-              )}
-
-              {contact?.phoneDisplay && (
-                <li className="pt-2">
-                   <div className="text-sm text-zinc-500 mb-1">Support Line</div>
-                   <a 
-                     href={contact.phoneHref || "#"} 
-                     className="text-xl font-bold text-white hover:text-primary transition-colors flex items-center gap-2"
-                   >
-                     <Phone className="w-5 h-5" />
-                     {contact.phoneDisplay}
-                   </a>
-                </li>
-              )}
-            </ul>
-          </div>
-
         </div>
 
-        {/* --- Copyright --- */}
-        <div className="py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-          <p>
-            {settings?.footerLegal || `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`}
-          </p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
-            <Link href="/faq" className="hover:text-zinc-300 transition-colors">Faqs</Link>
+        {/* Space so footer content starts below CTA overlap (mobile needs more space) */}
+        <div className="pt-44 sm:pt-40 md:pt-28">
+          <div className="container mx-auto px-4 md:px-6">
+            {/* subtle divider */}
+            <div className="h-px w-full bg-primary-foreground/15 mb-10 md:mb-12" />
+
+            {/* Main grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10">
+              {/* Brand + Social */}
+              <div className="lg:col-span-4 space-y-5">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-primary-foreground/15 border border-primary-foreground/20 flex items-center justify-center">
+                    <div className="h-4 w-4 rounded-full bg-primary-foreground" />
+                  </div>
+                  <span className="text-2xl font-heading font-bold tracking-tight">
+                    {brandName}
+                  </span>
+                </div>
+
+                <p className="text-primary-foreground/80 leading-relaxed max-w-sm">
+                  {brandDescription}
+                </p>
+
+                {socials.length > 0 && (
+                  <div className="flex items-center gap-3 pt-1">
+                    {socials.map((s, idx) => (
+                      <a
+                        key={idx}
+                        href={s.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-10 h-10 rounded-full bg-primary-foreground/10 border border-primary-foreground/15
+                                   flex items-center justify-center text-primary-foreground/85
+                                   hover:bg-primary-foreground hover:text-primary transition-all duration-300"
+                        aria-label={s.platform}
+                      >
+                        <SocialIcon platform={s.platform} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Quick Links */}
+              <div className="lg:col-span-2">
+                <h4 className="font-bold text-lg mb-4">About</h4>
+                <ul className="space-y-3">
+                  {quickLinks.map((l, idx) => (
+                    <li key={idx}>
+                      <Link
+                        href={l.href}
+                        className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                      >
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Services */}
+              <div className="lg:col-span-3">
+                <h4 className="font-bold text-lg mb-4">Services</h4>
+                <ul className="space-y-3">
+                  {topServices.map((s) => (
+                    <li key={s._id}>
+                      <Link
+                        href={`/services/${s.slug.current}`}
+                        className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                      >
+                        {s.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="pt-4">
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                  >
+                    View All Services <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Contact */}
+              <div className="lg:col-span-3">
+                <h4 className="font-bold text-lg mb-4">Contact Details</h4>
+
+                <ul className="space-y-4">
+                  {(contact?.addressLine1 || contact?.addressLine2) && (
+                    <li className="flex items-start gap-3 text-primary-foreground/80">
+                      <MapPin className="w-5 h-5 shrink-0 mt-0.5 text-primary-foreground" />
+                      <span>
+                        {contact?.addressLine1}
+                        {contact?.addressLine2 && (
+                          <>
+                            <br />
+                            {contact.addressLine2}
+                          </>
+                        )}
+                      </span>
+                    </li>
+                  )}
+
+                  {contact?.email && (
+                    <li className="flex items-center gap-3 text-primary-foreground/80">
+                      <Mail className="w-5 h-5 shrink-0 text-primary-foreground" />
+                      <a
+                        href={`mailto:${contact.email}`}
+                        className="hover:text-primary-foreground transition-colors"
+                      >
+                        {contact.email}
+                      </a>
+                    </li>
+                  )}
+
+                  {contact?.phoneDisplay && (
+                    <li className="flex items-center gap-3 text-primary-foreground/80">
+                      <Phone className="w-5 h-5 shrink-0 text-primary-foreground" />
+                      <a
+                        href={contact.phoneHref || "#"}
+                        className="font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                      >
+                        {contact.phoneDisplay}
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px w-full bg-primary-foreground/15" />
+
+            {/* Bottom bar */}
+            <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+              <p className="text-primary-foreground/70">{copyrightText}</p>
+
+              <div className="flex items-center gap-6 text-primary-foreground/70">
+                <Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">
+                  Terms & Conditions
+                </Link>
+              </div>
+            </div>
           </div>
+
+          <div className="pb-2" />
         </div>
       </div>
     </footer>

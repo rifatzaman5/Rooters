@@ -12,7 +12,19 @@ export const heroQuery = `
     ctaLink,
     secondCtaText,
     secondCtaLink,
-    socialProofText
+    socialProofText,
+    slides[] {
+      _key,
+      heading,
+      subheading,
+      paragraph,
+      image { asset, alt },
+      ctaText,
+      ctaLink,
+      secondCtaText,
+      secondCtaLink,
+      socialProofText
+    }
   }
 `
 
@@ -31,15 +43,18 @@ export const aboutUsQuery = `
 
 // --- PAGE QUERIES ---
 
-// 1. HOME PAGE QUERY
+// 1. HOME PAGE QUERY (👇 THIS WAS THE MISSING PART)
 export const homePageQuery = `
   *[_type == "page" && slug.current == "home"][0] {
     _id,
     title,
     slug,
+    
     hero {
       _type,
       variant,
+      
+      // Single fields (for fallback/static)
       heading,
       subheading,
       paragraph,
@@ -48,8 +63,23 @@ export const homePageQuery = `
       ctaLink,
       secondCtaText,
       secondCtaLink,
-      socialProofText
+      socialProofText,
+
+      // 👇 THE CAROUSEL SLIDES (Crucial!)
+      slides[] {
+        _key,
+        heading,
+        subheading,
+        paragraph,
+        image { asset, alt },
+        ctaText,
+        ctaLink,
+        secondCtaText,
+        secondCtaLink,
+        socialProofText
+      }
     },
+
     aboutUs {
       _type,
       heading,
@@ -60,6 +90,21 @@ export const homePageQuery = `
       ctaText,
       ctaLink
     },
+
+    testimonialSection {
+      heading,
+      description,
+      mainImage { asset, alt },
+      testimonials[] {
+        _key,
+        author,
+        role,
+        quote,
+        rating
+      }
+    },
+    
+
     pricing {
       heading,
       subheading,
@@ -80,7 +125,6 @@ export const homePageQuery = `
 `
 
 // 2. GENERIC PAGE BY SLUG QUERY
-// Fetches ALL potential sections for a page
 export const pageBySlugQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     _id,
@@ -139,7 +183,6 @@ export const pageBySlugQuery = `
 ` as const
 
 // 3. FAQ PAGE SPECIFIC QUERY
-// Looks for a Page with slug "faq" and grabs the faq section
 export const faqPageQuery = `
   *[_type == "page" && slug.current == "faq"][0] {
     _id,
@@ -172,7 +215,6 @@ export const faqPageQuery = `
 `
 
 // 4. LEGAL PAGE SPECIFIC QUERY
-// Looks for a Page with the specific slug (e.g. "privacy-policy") and grabs the content section
 export const legalPageQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     title,
@@ -185,7 +227,6 @@ export const legalPageQuery = `
 `
 
 // 5. BLOG INDEX PAGE DATA
-// Fetches the "blog" Page info AND the list of Posts
 export const blogPageDataQuery = `
   {
     "page": *[_type == "page" && slug.current == "blog"][0] {
@@ -269,17 +310,7 @@ export const singleServiceQuery = `
   }
 `
 
-// --- TESTIMONIALS & SETTINGS ---
-
-export const testimonialsQuery = `
-  *[_type == "testimonial"] {
-    _id,
-    author,
-    role,
-    quote,
-    rating
-  }
-`
+// --- SITE SETTINGS ---
 
 export const siteSettingsQuery = `
   *[_type == "siteSettings"][0] {

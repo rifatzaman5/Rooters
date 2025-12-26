@@ -24,21 +24,38 @@ export interface SanityDocument {
 }
 
 // Hero Section Type
-export interface HeroSection {
-  _type: 'hero'
-  variant: 'home' | 'default'
+// Add this new interface for a single slide
+export interface HeroSlide {
+  _key: string
   heading: string
   subheading?: string
   paragraph?: string
   image?: SanityImage
-  // Primary CTA
   ctaText?: string
   ctaLink?: string
-  // Secondary CTA
   secondCtaText?: string
   secondCtaLink?: string
-  // Social Proof
   socialProofText?: string
+}
+
+// Update the HeroSection interface
+export interface HeroSection {
+  _type: 'hero'
+  variant: 'home' | 'default'
+  
+  // These are the "flat" fields (used for default variant or single slide)
+  heading: string
+  subheading?: string
+  paragraph?: string
+  image?: SanityImage
+  ctaText?: string
+  ctaLink?: string
+  secondCtaText?: string
+  secondCtaLink?: string
+  socialProofText?: string
+
+  // 👇 ADD THIS NEW FIELD
+  slides?: HeroSlide[] 
 }
 
 export interface AboutUsFeature {
@@ -67,12 +84,21 @@ export interface ServiceItem {
   mainImage: any
 }
 
+// 👇 UPDATED: TestimonialItem uses _key now
 export interface TestimonialItem {
-  _id: string
+  _key: string
   author: string
   role: string
   quote: string
   rating: number
+}
+
+// 👇 NEW: Section Data Interface
+export interface TestimonialSectionData {
+  heading: string
+  description: string
+  mainImage: any // Sanity Image
+  testimonials: TestimonialItem[]
 }
 
 // Pricing Types
@@ -95,6 +121,8 @@ export interface PricingSection {
   subheading?: string
   plans: PricingPlan[]
 }
+
+
 
 export interface SiteLink {
   label: string

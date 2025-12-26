@@ -6,43 +6,40 @@ import TestimonialsSection from '@/components/TestimonialsSection'
 import PricingSection from '@/components/PricingSection'
 import Footer from '@/components/Footer'
 import { client } from '@/lib/sanity/client'
-import { homePageQuery, servicesQuery, testimonialsQuery } from '@/lib/sanity/queries'
+import { homePageQuery, servicesQuery } from '@/lib/sanity/queries'
 
-// Revalidate every 60 seconds
-export const revalidate = 60;
+export const revalidate = 60
 
 export default async function Home() {
-  // Fetch all data in parallel
-  const [pageData, services, testimonials] = await Promise.all([
+  const [pageData, services] = await Promise.all([
     client.fetch(homePageQuery),
     client.fetch(servicesQuery),
-    client.fetch(testimonialsQuery)
   ])
 
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      
-      {/* Hero Section */}
+
       {pageData?.hero && <Hero data={pageData.hero} />}
-      
-      {/* Services Section */}
+
+      {/* HOME SERVICES: 8 tiles, icon + title only */}
       {services && services.length > 0 && (
-        <ServicesSection services={services} />
+        <ServicesSection
+          services={services}
+          limit={8}
+          showViewAll={true}
+          variant="tiles"
+        />
       )}
-      
-      {/* About Section */}
+
       {pageData?.aboutUs && <AboutUs data={pageData.aboutUs} />}
-      
-      {/* Pricing Section */}
+
       {pageData?.pricing && <PricingSection data={pageData.pricing} />}
 
-      {/* Testimonials */}
-      {testimonials && testimonials.length > 0 && (
-        <TestimonialsSection testimonials={testimonials} />
+      {pageData?.testimonialSection && (
+        <TestimonialsSection data={pageData.testimonialSection} />
       )}
-
       <Footer />
     </main>
-  );
+  )
 }
