@@ -42,10 +42,8 @@ export default async function ServicesPage() {
         </section>
       )}
 
-      {/* ✅ Guarantees on Services page */}
       {pageData?.guaranteesSection && <GuaranteesSection data={pageData.guaranteesSection} />}
 
-      {/* ✅ Testimonials on Services page */}
       {pageData?.testimonialSection && <TestimonialsSection data={pageData.testimonialSection} />}
 
       <Footer />

@@ -111,6 +111,55 @@ export default defineType({
           type: "string",
           initialValue: "Ask About Our Hero Guarantees",
         }),
+
+        // ✅ NEW: Intro + heading highlight
+        defineField({
+          name: "intro",
+          title: "Intro Paragraph",
+          type: "text",
+          rows: 3,
+        }),
+        defineField({
+          name: "highlightWord",
+          title: "Heading Highlight Word (Optional)",
+          type: "string",
+          description: 'Example: "Australians" (will be colored in the heading).',
+        }),
+
+        // ✅ NEW: Stats strip (optional)
+        defineField({
+          name: "statsHeading",
+          title: "Stats Heading",
+          type: "string",
+          initialValue: "Our track record speaks for itself",
+        }),
+        defineField({
+          name: "stats",
+          title: "Track Record Stats (Up to 3)",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "value",
+                  title: "Value",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "label",
+                  title: "Label",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+              preview: { select: { title: "value", subtitle: "label" } },
+            },
+          ],
+          validation: (Rule) => Rule.max(3).warning("Best with 3 stats for the layout."),
+        }),
+
         defineField({
           name: "items",
           title: "Guarantee Items",
@@ -132,6 +181,13 @@ export default defineType({
                   rows: 3,
                 }),
                 defineField({
+                  name: "points",
+                  title: "Bullet Points",
+                  type: "array",
+                  of: [{ type: "string" }],
+                  description: "Add 2–4 bullets for this card.",
+                }),
+                defineField({
                   name: "icon",
                   title: "Icon Name (Lucide)",
                   type: "string",
@@ -145,6 +201,7 @@ export default defineType({
           ],
           validation: (Rule) => Rule.max(4).warning("Best with 4 items to match the layout."),
         }),
+
         defineField({
           name: "primaryButtonText",
           title: "Primary Button Text",

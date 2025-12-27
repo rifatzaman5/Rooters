@@ -51,8 +51,8 @@ export default function Navbar() {
 
   const navbarClasses = cn(
     "fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b",
-    isHomeTop && "bg-background/60 backdrop-blur-md border-primary/15",
-    isScrolled && "bg-background/85 backdrop-blur-md border-primary/25 shadow-md",
+    isHomeTop && "bg-background/80 backdrop-blur-md border-border/50",
+    isScrolled && "bg-background/95 backdrop-blur-md border-border shadow-sm",
     !isHome && "bg-background border-border"
   )
 
@@ -66,26 +66,19 @@ export default function Navbar() {
       "inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors " +
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
 
-    const homeTopHover = "hover:bg-primary/10 hover:text-foreground"
-    const defaultHover = "hover:text-primary"
-
-    const activeStyle = isHomeTop
-      ? "bg-primary/10 text-foreground"
-      : "text-primary"
+    const hover = "hover:text-primary hover:bg-accent"
+    const activeStyle = "text-primary bg-accent"
 
     return cn(
       base,
       textColorClass,
-      isHomeTop ? homeTopHover : defaultHover,
+      hover,
       isActive && activeStyle
     )
   }
 
   const triggerClass = cn(
-    "bg-transparent",
-    isHomeTop
-      ? "hover:bg-primary/10 hover:text-foreground focus:bg-primary/10 focus:text-foreground"
-      : "hover:text-primary focus:text-primary"
+    "bg-transparent hover:text-primary hover:bg-accent focus:text-primary focus:bg-accent"
   )
 
   const services = [
@@ -123,7 +116,7 @@ export default function Navbar() {
     <>
       <nav className={navbarClasses}>
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group relative z-50">
               <div className="h-8 w-8 rounded-full border-2 border-primary flex items-center justify-center">
@@ -150,23 +143,23 @@ export default function Navbar() {
                     </NavigationMenuTrigger>
 
                     <NavigationMenuContent>
-                      <ul className="grid gap-2 p-4 w-[450px] md:w-[550px]">
+                      <ul className="grid gap-2 p-4 w-[450px] md:w-[500px]">
                         {/* View All Services - Highlighted */}
-                        <li className="mb-2">
+                        <li className="mb-1">
                           <NavigationMenuLink asChild>
                             <Link
                               href="/services"
-                              className="flex items-center justify-between w-full select-none rounded-lg bg-primary/5 border border-primary/20 p-4 no-underline outline-none transition-all hover:bg-primary/10 hover:border-primary/30 group"
+                              className="flex items-center justify-between w-full select-none rounded-md bg-primary/5 border border-primary/20 p-3.5 no-underline outline-none transition-all hover:bg-primary/10 hover:border-primary/30 group"
                             >
                               <div>
-                                <div className="text-base font-semibold text-foreground mb-1">
+                                <div className="text-sm font-semibold text-foreground mb-0.5">
                                   View All Services
                                 </div>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-xs text-muted-foreground">
                                   Explore our complete range of solutions
                                 </p>
                               </div>
-                              <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform" />
+                              <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -181,7 +174,7 @@ export default function Navbar() {
                               <NavigationMenuLink asChild>
                                 <Link
                                   href={service.href}
-                                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                  className="block select-none space-y-1 rounded-md p-2.5 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                 >
                                   <div className="text-sm font-medium leading-none">
                                     {service.title}
@@ -229,8 +222,8 @@ export default function Navbar() {
             </div>
 
             {/* CTA + Mobile toggle */}
-            <div className="flex items-center gap-4">
-              <Button asChild className="hidden md:inline-flex font-semibold">
+            <div className="flex items-center gap-3">
+              <Button asChild size="sm" className="hidden md:inline-flex font-semibold">
                 <Link href="/contact">Get a Quote</Link>
               </Button>
 
@@ -240,9 +233,9 @@ export default function Navbar() {
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
-                  <X className={textColorClass} />
+                  <X className={cn(textColorClass, "h-5 w-5")} />
                 ) : (
-                  <Menu className={textColorClass} />
+                  <Menu className={cn(textColorClass, "h-5 w-5")} />
                 )}
               </button>
             </div>
@@ -255,22 +248,22 @@ export default function Navbar() {
         <>
           {/* Backdrop Overlay */}
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
             onClick={closeMobileMenu}
             aria-hidden="true"
           />
 
           {/* Mobile Menu Panel */}
-          <div className="fixed top-16 left-0 right-0 bottom-0 z-40 md:hidden animate-in slide-in-from-top duration-300">
-            <div className=" bg-background border-r border-border shadow-2xl overflow-y-auto">
-              <div className="p-6 space-y-1">
+          <div className="fixed top-[4.5rem] left-0 right-0 bottom-0 z-40 md:hidden animate-in slide-in-from-top duration-300">
+            <div className="bg-background border-r border-border shadow-lg overflow-y-auto h-full">
+              <div className="p-5 space-y-1">
                 {/* Services Accordion */}
                 <div className="border-b border-border pb-2">
                   <button
                     onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                     className={cn(
-                      "w-full flex items-center justify-between py-3 font-semibold text-left transition-colors rounded-md px-2",
-                      isActiveMobile("/services") ? "text-primary" : "text-foreground hover:text-primary hover:bg-accent"
+                      "w-full flex items-center justify-between py-2.5 font-semibold text-left transition-colors rounded-md px-2",
+                      isActiveMobile("/services") ? "text-primary bg-accent" : "text-foreground hover:text-primary hover:bg-accent"
                     )}
                   >
                     <span>Services</span>
@@ -289,18 +282,18 @@ export default function Navbar() {
                       isMobileServicesOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
                     )}
                   >
-                    <div className="pb-3 pt-2 space-y-2">
+                    <div className="pb-2 pt-2 space-y-2">
                       {/* View All Services */}
                       <Link
                         href="/services"
                         onClick={closeMobileMenu}
-                        className="flex items-center justify-between w-full rounded-lg bg-primary/5 border border-primary/20 p-4 transition-all hover:bg-primary/10 active:scale-[0.98] group"
+                        className="flex items-center justify-between w-full rounded-md bg-primary/5 border border-primary/20 p-3 transition-all hover:bg-primary/10 active:scale-[0.98] group"
                       >
                         <div>
                           <div className="text-sm font-semibold text-foreground">
                             View All Services
                           </div>
-                          <p className="text-xs text-muted-foreground mt-1">
+                          <p className="text-xs text-muted-foreground mt-0.5">
                             Explore complete range
                           </p>
                         </div>
@@ -314,12 +307,12 @@ export default function Navbar() {
                             key={service.href}
                             href={service.href}
                             onClick={closeMobileMenu}
-                            className="block rounded-lg p-3 hover:bg-accent active:bg-accent/80 transition-colors"
+                            className="block rounded-md p-2.5 hover:bg-accent active:bg-accent/80 transition-colors"
                           >
                             <div className="text-sm font-medium text-foreground">
                               {service.title}
                             </div>
-                            <p className="text-xs text-muted-foreground mt-1">
+                            <p className="text-xs text-muted-foreground mt-0.5">
                               {service.description}
                             </p>
                           </Link>
@@ -334,8 +327,8 @@ export default function Navbar() {
                   href="/about"
                   onClick={closeMobileMenu}
                   className={cn(
-                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
-                    isActiveMobile("/about") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                    "block py-2.5 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/about") ? "text-primary bg-accent" : "text-foreground hover:text-primary"
                   )}
                 >
                   About
@@ -344,8 +337,8 @@ export default function Navbar() {
                   href="/blog"
                   onClick={closeMobileMenu}
                   className={cn(
-                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
-                    isActiveMobile("/blog") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                    "block py-2.5 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/blog") ? "text-primary bg-accent" : "text-foreground hover:text-primary"
                   )}
                 >
                   Blog
@@ -354,8 +347,8 @@ export default function Navbar() {
                   href="/contact"
                   onClick={closeMobileMenu}
                   className={cn(
-                    "block py-3 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
-                    isActiveMobile("/contact") ? "text-primary bg-accent/50" : "text-foreground hover:text-primary"
+                    "block py-2.5 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/contact") ? "text-primary bg-accent" : "text-foreground hover:text-primary"
                   )}
                 >
                   Contact

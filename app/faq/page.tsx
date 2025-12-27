@@ -24,42 +24,42 @@ export default async function FaqPage() {
       {/* Optional hero */}
       {data?.hero && <Hero data={data.hero} />}
 
-      <div className="flex-1 container mx-auto px-4 md:px-6 pt-24 pb-20 max-w-3xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold">
+      <div className="flex-1 container mx-auto px-4 md:px-6 pt-28 pb-16 max-w-3xl">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-heading font-bold">
             {data?.faq?.title || data?.title || "FAQ"}
           </h1>
           {data?.faq?.description && (
-            <p className="mt-4 text-lg text-muted-foreground">
+            <p className="mt-3 text-base sm:text-lg text-muted-foreground">
               {data.faq.description}
             </p>
           )}
         </div>
 
         {items.length > 0 ? (
-          <Accordion type="single" collapsible className="w-full space-y-4">
+          <Accordion type="single" collapsible className="w-full space-y-3">
             {items.map((item: any, index: number) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="border border-border rounded-lg px-6 bg-card"
+                className="border border-border rounded-lg px-5 bg-card hover:bg-accent transition-colors"
               >
-                <AccordionTrigger className="text-left py-6 text-base md:text-lg font-semibold hover:text-primary">
+                <AccordionTrigger className="text-left py-4 text-sm md:text-base font-semibold hover:text-primary">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
+                <AccordionContent className="pb-4 text-sm text-muted-foreground leading-relaxed">
                   {item.answer || "Answer coming soon."}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         ) : (
-          <div className="text-center p-8 bg-muted/30 rounded-xl border border-dashed border-muted-foreground/25">
-            <p className="font-semibold text-muted-foreground">
+          <div className="text-center p-8 bg-muted/20 rounded-lg border border-dashed border-border">
+            <p className="font-semibold text-foreground">
               No FAQs found.
             </p>
-            <p className="text-muted-foreground mt-2">
-              Make sure the Page with slug <span className="font-mono">faq</span> is published and has FAQ items.
+            <p className="text-sm text-muted-foreground mt-2">
+              Make sure the Page with slug <span className="font-mono text-primary">faq</span> is published and has FAQ items.
             </p>
           </div>
         )}

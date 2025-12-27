@@ -110,17 +110,30 @@ export interface PricingSection {
   plans: PricingPlan[]
 }
 
-/** ✅ NEW: Guarantees section types */
+/** ✅ UPDATED: Guarantees section types (now supports intro, stats, bullet points) */
+export interface GuaranteesStat {
+  _key: string
+  value: string
+  label: string
+}
+
 export interface GuaranteesItem {
   _key: string
   title: string
   description?: string
   icon?: string
+  points?: string[]
 }
 
 export interface GuaranteesSectionData {
   kicker?: string
   heading: string
+
+  intro?: string
+  highlightWord?: string
+  statsHeading?: string
+  stats?: GuaranteesStat[]
+
   items: GuaranteesItem[]
   primaryButtonText?: string
   primaryButtonLink?: string
@@ -180,7 +193,7 @@ export interface Post {
   title: string
   slug: { current: string }
   publishedAt: string
-  mainImage: any
+  mainImage?: SanityImage
   excerpt: string
   body: any
 }

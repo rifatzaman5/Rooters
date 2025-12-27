@@ -106,34 +106,31 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
   }
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-32 bg-background overflow-hidden">
-      {/* --- Background Decor --- */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-28 -right-28 h-[420px] w-[420px] sm:h-[520px] sm:w-[520px] md:h-[640px] md:w-[640px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute -bottom-28 -left-28 h-[420px] w-[420px] sm:h-[520px] sm:w-[520px] md:h-[640px] md:w-[640px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/0 via-background to-background" />
-      </div>
+    <section className="relative py-16 sm:py-20 md:py-24 bg-background overflow-hidden">
+      {/* Simple top border */}
+      <div className="absolute top-0 inset-x-0 h-px bg-border/50" />
+
+      {/* Subtle background */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-muted/20" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* --- Header --- */}
-        <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider justify-center">
-            <span className="w-8 h-[2px] bg-primary/50"></span>
+        <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14 space-y-4">
+          <div className="inline-flex items-center gap-2 border border-primary/20 bg-primary/10 px-3.5 py-1.5 rounded-md text-sm font-medium text-primary">
             Testimonials
-            <span className="w-8 h-[2px] bg-primary/50"></span>
           </div>
 
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1] text-balance">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight tracking-tight">
             {heading}
           </h2>
 
-          <p className="text-base sm:text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             {description}
           </p>
 
-          <div className="flex justify-center gap-2 pt-2">
+          <div className="flex justify-center gap-1 pt-2">
             {[1, 2, 3, 4, 5].map((star) => (
-              <Star key={star} className="w-6 h-6 sm:w-8 sm:h-8 fill-yellow-400 text-yellow-400" />
+              <Star key={star} className="w-5 h-5 sm:w-6 sm:h-6 fill-yellow-400 text-yellow-400" />
             ))}
           </div>
         </div>
@@ -141,7 +138,7 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
         {/* =========================================
             DESKTOP VIEW
            ========================================= */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Image */}
           <div className="lg:col-span-5 relative flex flex-col justify-center items-center h-full">
             <div className="relative w-full flex flex-col items-center z-10">
@@ -149,18 +146,18 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                 <img
                   src={urlFor(data.mainImage).width(600).url()}
                   alt={data.mainImage.alt || "Happy Client"}
-                  className="w-full max-w-[400px] object-contain drop-shadow-2xl"
+                  className="w-full max-w-[400px] object-contain drop-shadow-lg"
                   style={{ maxHeight: "550px" }}
                 />
               ) : (
-                <div className="w-full h-[400px] bg-muted/20 rounded-2xl flex items-center justify-center text-muted-foreground border-2 border-dashed border-muted">
+                <div className="w-full h-[400px] bg-muted/20 rounded-lg flex items-center justify-center text-muted-foreground border-2 border-dashed border-muted">
                   Upload "Main Image"
                 </div>
               )}
             </div>
           </div>
 
-          {/* Right Column: Cards + Buttons (Buttons top-right) */}
+          {/* Right Column: Cards + Buttons */}
           <div
             className="lg:col-span-7 flex flex-col gap-6"
             onMouseEnter={() => setPauseDesktop(true)}
@@ -172,7 +169,8 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                 <Button
                   onClick={prevDesktop}
                   size="icon"
-                  className="h-11 w-11 rounded-full border border-primary/20 bg-background text-primary hover:bg-primary hover:text-white transition-all"
+                  variant="outline"
+                  className="h-10 w-10 rounded-full"
                   aria-label="Previous testimonials"
                 >
                   <ChevronLeft className="h-5 w-5" />
@@ -180,7 +178,8 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                 <Button
                   onClick={nextDesktop}
                   size="icon"
-                  className="h-11 w-11 rounded-full border border-primary/20 bg-background text-primary hover:bg-primary hover:text-white transition-all"
+                  variant="outline"
+                  className="h-10 w-10 rounded-full"
                   aria-label="Next testimonials"
                 >
                   <ChevronRight className="h-5 w-5" />
@@ -189,16 +188,16 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
             )}
 
             {/* 2x2 Grid */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-5">
               {currentDesktopItems.map((item) => (
                 <div
                   key={item._key}
-                  className="group relative h-full bg-card border border-border/50 p-8 rounded-2xl transition-all duration-300 hover:shadow-xl hover:border-primary/40 hover:-translate-y-1"
+                  className="group relative h-full bg-card border border-border p-6 rounded-lg transition-all duration-300 hover:shadow-md hover:border-primary/30"
                 >
-                  <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/5 group-hover:text-primary/10 transition-colors" />
+                  <Quote className="absolute top-4 right-4 w-10 h-10 text-primary/10" />
 
                   {/* Rating */}
-                  <div className="flex gap-1 mb-4">
+                  <div className="flex gap-1 mb-3">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star
                         key={i}
@@ -211,18 +210,18 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                   </div>
 
                   {/* Quote */}
-                  <p className="text-foreground/80 text-base leading-relaxed mb-6 italic relative z-10">
+                  <p className="text-foreground/80 text-sm leading-relaxed mb-5 italic relative z-10">
                     "{item.quote}"
                   </p>
 
                   {/* Author */}
-                  <div className="mt-auto border-t border-border/30 pt-4 flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                  <div className="mt-auto border-t border-border/30 pt-3 flex items-center gap-2.5">
+                    <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
                       {item.author?.charAt(0) || "A"}
                     </div>
                     <div>
                       <h4 className="font-bold text-foreground text-sm">{item.author}</h4>
-                      {item.role && <p className="text-xs font-semibold text-primary/80">{item.role}</p>}
+                      {item.role && <p className="text-xs font-medium text-primary/80">{item.role}</p>}
                     </div>
                   </div>
                 </div>
@@ -246,13 +245,13 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
         >
-          <div className="w-full max-w-lg bg-card border border-border/50 p-8 rounded-3xl relative min-h-[300px] flex flex-col shadow-sm">
-            <div className="mb-6">
-              <div className="w-12 h-12 bg-primary/10 rounded-xl rounded-bl-none flex items-center justify-center mb-4">
-                <Quote className="w-5 h-5 text-primary fill-primary" />
+          <div className="w-full max-w-lg bg-card border border-border p-6 rounded-lg relative min-h-[280px] flex flex-col shadow-sm">
+            <div className="mb-5">
+              <div className="w-11 h-11 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <Quote className="w-5 h-5 text-primary" />
               </div>
 
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-1 mb-3">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star
                     key={i}
@@ -266,33 +265,33 @@ export default function TestimonialsSection({ data }: TestimonialsSectionProps) 
                 ))}
               </div>
 
-              <p className="text-foreground/80 text-lg leading-relaxed italic">
+              <p className="text-foreground/80 text-base leading-relaxed italic">
                 "{testimonials[mobileIndex].quote}"
               </p>
             </div>
 
-            <div className="mt-auto border-t border-border/40 pt-4 flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+            <div className="mt-auto border-t border-border/30 pt-3 flex items-center gap-2.5">
+              <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
                 {testimonials[mobileIndex].author?.charAt(0) || "A"}
               </div>
               <div>
-                <h4 className="font-bold text-foreground text-lg">{testimonials[mobileIndex].author}</h4>
+                <h4 className="font-bold text-foreground text-base">{testimonials[mobileIndex].author}</h4>
                 {testimonials[mobileIndex].role && (
-                  <p className="text-sm font-semibold text-primary/80">{testimonials[mobileIndex].role}</p>
+                  <p className="text-sm font-medium text-primary/80">{testimonials[mobileIndex].role}</p>
                 )}
               </div>
             </div>
           </div>
 
           {/* Dots */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-2 mt-6">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setMobileIndex(index)}
                 className={cn(
-                  "h-2.5 rounded-full transition-all duration-300",
-                  index === mobileIndex ? "w-8 bg-primary" : "w-2.5 bg-primary/20 hover:bg-primary/40"
+                  "h-1.5 rounded-full transition-all duration-300",
+                  index === mobileIndex ? "w-6 bg-primary" : "w-1.5 bg-primary/20 hover:bg-primary/40"
                 )}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

@@ -58,13 +58,13 @@ export default async function Footer() {
     settings?.footerLegal || `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`
 
   return (
-    <footer className="relative overflow-visible bg-background mt-20 md:mt-24">
-      {/* Footer panel (rounded top corners) */}
-      <div className="relative bg-primary text-primary-foreground brightness-90 rounded-t-[2.5rem] md:rounded-t-[3rem]">
-        {/* CTA (overlapping, fully visible) */}
-        <div className="absolute left-0 right-0 -top-24 sm:-top-20 md:-top-28 z-30">
+    <footer className="relative overflow-visible bg-background mt-16 md:mt-20">
+      {/* Footer panel */}
+      <div className="relative bg-primary text-primary-foreground rounded-t-3xl">
+        {/* CTA (overlapping) */}
+        <div className="absolute left-0 right-0 -top-20 sm:-top-16 md:-top-24 z-30">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="mx-auto max-w-5xl rounded-3xl bg-background text-foreground border border-primary/20 shadow-2xl px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-9">
+            <div className="mx-auto max-w-5xl rounded-lg bg-background text-foreground border border-border shadow-lg px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-9">
               <div className="flex flex-col items-center text-center gap-4">
                 <h3 className="font-heading text-lg sm:text-2xl md:text-3xl font-bold leading-tight">
                   Book a free consultation with our experts today.
@@ -77,16 +77,16 @@ export default async function Footer() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center h-12 px-7 rounded-full bg-primary text-primary-foreground font-semibold
-                               hover:bg-primary/90 transition-colors w-full sm:w-auto"
+                    className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-primary text-primary-foreground font-semibold
+                               hover:bg-primary/90 transition-colors w-full sm:w-auto shadow-sm"
                   >
                     Contact Us Now <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
 
                   <a
                     href={contact?.phoneHref || "tel:#"}
-                    className="inline-flex items-center justify-center h-12 px-7 rounded-full border border-border
-                               bg-background hover:bg-muted transition-colors font-semibold w-full sm:w-auto"
+                    className="inline-flex items-center justify-center h-11 px-6 rounded-md border border-border
+                               bg-background hover:bg-accent transition-colors font-semibold w-full sm:w-auto"
                   >
                     <Phone className="w-4 h-4 mr-2" />
                     {contact?.phoneDisplay || "Call Support"}
@@ -97,40 +97,40 @@ export default async function Footer() {
           </div>
         </div>
 
-        {/* Space so footer content starts below CTA overlap (mobile needs more space) */}
-        <div className="pt-44 sm:pt-40 md:pt-28">
+        {/* Space for CTA overlap */}
+        <div className="pt-44 sm:pt-32 md:pt-24">
           <div className="container mx-auto px-4 md:px-6">
-            {/* subtle divider */}
-            <div className="h-px w-full bg-primary-foreground/15 mb-10 md:mb-12" />
+            {/* Divider */}
+            <div className="h-px w-full bg-primary-foreground/10 mb-8 md:mb-10" />
 
             {/* Main grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-8">
               {/* Brand + Social */}
-              <div className="lg:col-span-4 space-y-5">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-primary-foreground/15 border border-primary-foreground/20 flex items-center justify-center">
+              <div className="lg:col-span-4 space-y-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
                     <div className="h-4 w-4 rounded-full bg-primary-foreground" />
                   </div>
-                  <span className="text-2xl font-heading font-bold tracking-tight">
+                  <span className="text-xl font-heading font-bold tracking-tight">
                     {brandName}
                   </span>
                 </div>
 
-                <p className="text-primary-foreground/80 leading-relaxed max-w-sm">
+                <p className="text-primary-foreground/75 leading-relaxed text-sm max-w-sm">
                   {brandDescription}
                 </p>
 
                 {socials.length > 0 && (
-                  <div className="flex items-center gap-3 pt-1">
+                  <div className="flex items-center gap-2.5 pt-1">
                     {socials.map((s, idx) => (
                       <a
                         key={idx}
                         href={s.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-10 h-10 rounded-full bg-primary-foreground/10 border border-primary-foreground/15
-                                   flex items-center justify-center text-primary-foreground/85
-                                   hover:bg-primary-foreground hover:text-primary transition-all duration-300"
+                        className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/15
+                                   flex items-center justify-center text-primary-foreground/80
+                                   hover:bg-primary-foreground hover:text-primary transition-all duration-200"
                         aria-label={s.platform}
                       >
                         <SocialIcon platform={s.platform} />
@@ -142,13 +142,13 @@ export default async function Footer() {
 
               {/* Quick Links */}
               <div className="lg:col-span-2">
-                <h4 className="font-bold text-lg mb-4">About</h4>
-                <ul className="space-y-3">
+                <h4 className="font-bold text-base mb-3.5">About</h4>
+                <ul className="space-y-2.5">
                   {quickLinks.map((l, idx) => (
                     <li key={idx}>
                       <Link
                         href={l.href}
-                        className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                        className="text-sm text-primary-foreground/75 hover:text-primary-foreground transition-colors"
                       >
                         {l.label}
                       </Link>
@@ -159,13 +159,13 @@ export default async function Footer() {
 
               {/* Services */}
               <div className="lg:col-span-3">
-                <h4 className="font-bold text-lg mb-4">Services</h4>
-                <ul className="space-y-3">
+                <h4 className="font-bold text-base mb-3.5">Services</h4>
+                <ul className="space-y-2.5">
                   {topServices.map((s) => (
                     <li key={s._id}>
                       <Link
                         href={`/services/${s.slug.current}`}
-                        className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                        className="text-sm text-primary-foreground/75 hover:text-primary-foreground transition-colors"
                       >
                         {s.title}
                       </Link>
@@ -173,10 +173,10 @@ export default async function Footer() {
                   ))}
                 </ul>
 
-                <div className="pt-4">
+                <div className="pt-3">
                   <Link
                     href="/services"
-                    className="inline-flex items-center gap-2 font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
                   >
                     View All Services <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -185,12 +185,12 @@ export default async function Footer() {
 
               {/* Contact */}
               <div className="lg:col-span-3">
-                <h4 className="font-bold text-lg mb-4">Contact Details</h4>
+                <h4 className="font-bold text-base mb-3.5">Contact Details</h4>
 
-                <ul className="space-y-4">
+                <ul className="space-y-3">
                   {(contact?.addressLine1 || contact?.addressLine2) && (
-                    <li className="flex items-start gap-3 text-primary-foreground/80">
-                      <MapPin className="w-5 h-5 shrink-0 mt-0.5 text-primary-foreground" />
+                    <li className="flex items-start gap-2.5 text-sm text-primary-foreground/75">
+                      <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-primary-foreground/75" />
                       <span>
                         {contact?.addressLine1}
                         {contact?.addressLine2 && (
@@ -204,8 +204,8 @@ export default async function Footer() {
                   )}
 
                   {contact?.email && (
-                    <li className="flex items-center gap-3 text-primary-foreground/80">
-                      <Mail className="w-5 h-5 shrink-0 text-primary-foreground" />
+                    <li className="flex items-center gap-2.5 text-sm text-primary-foreground/75">
+                      <Mail className="w-4 h-4 shrink-0 text-primary-foreground/75" />
                       <a
                         href={`mailto:${contact.email}`}
                         className="hover:text-primary-foreground transition-colors"
@@ -216,8 +216,8 @@ export default async function Footer() {
                   )}
 
                   {contact?.phoneDisplay && (
-                    <li className="flex items-center gap-3 text-primary-foreground/80">
-                      <Phone className="w-5 h-5 shrink-0 text-primary-foreground" />
+                    <li className="flex items-center gap-2.5 text-sm text-primary-foreground/75">
+                      <Phone className="w-4 h-4 shrink-0 text-primary-foreground/75" />
                       <a
                         href={contact.phoneHref || "#"}
                         className="font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
@@ -231,18 +231,18 @@ export default async function Footer() {
             </div>
 
             {/* Divider */}
-            <div className="h-px w-full bg-primary-foreground/15" />
+            <div className="h-px w-full bg-primary-foreground/10" />
 
             {/* Bottom bar */}
-            <div className="py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-              <p className="text-primary-foreground/70">{copyrightText}</p>
+            <div className="py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-sm">
+              <p className="text-primary-foreground/60">{copyrightText}</p>
 
-              <div className="flex items-center gap-6 text-primary-foreground/70">
+              <div className="flex items-center gap-5 text-primary-foreground/60">
                 <Link href="/privacy" className="hover:text-primary-foreground transition-colors">
                   Privacy Policy
                 </Link>
                 <Link href="/faq" className="hover:text-primary-foreground transition-colors">
-                  Faqs
+                  FAQs
                 </Link>
               </div>
             </div>

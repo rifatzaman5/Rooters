@@ -20,17 +20,15 @@ export default async function AboutPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      {/* If hero exists in Sanity it will show, otherwise it won't */}
       {pageData?.hero && <Hero data={pageData.hero} />}
 
-      {/* If aboutUs exists in Sanity it will show */}
       {pageData?.aboutUs ? (
         <AboutUs data={pageData.aboutUs} />
       ) : (
-        <section className="container mx-auto px-4 py-20">
-          <h1 className="font-heading text-4xl font-bold">About</h1>
+        <section className="container mx-auto px-4 py-16">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold">About</h1>
           <p className="text-muted-foreground mt-3">
-            About page content not found. Please create a Page document with slug <b>about</b> in Sanity.
+            About page content not found. Please create a Page document with slug <span className="font-mono text-primary">about</span> in Sanity.
           </p>
         </section>
       )}

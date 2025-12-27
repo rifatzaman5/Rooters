@@ -1,3 +1,5 @@
+// lib/sanity/queries.ts
+
 // --- SECTION QUERIES (Helpers) ---
 
 export const heroQuery = `
@@ -43,6 +45,7 @@ export const aboutUsQuery = `
 
 // --- PAGE QUERIES ---
 
+// 1. HOME PAGE QUERY
 export const homePageQuery = `
   *[_type == "page" && slug.current == "home"][0] {
     _id,
@@ -119,11 +122,16 @@ export const homePageQuery = `
     guaranteesSection {
       kicker,
       heading,
+      intro,
+      highlightWord,
+      statsHeading,
+      stats[] { _key, value, label },
       items[] {
         _key,
         title,
         description,
-        icon
+        icon,
+        points
       },
       primaryButtonText,
       primaryButtonLink,
@@ -133,7 +141,19 @@ export const homePageQuery = `
   }
 `
 
-// ✅ UPDATED: pageBySlugQuery now also fetches testimonialSection + guaranteesSection
+// ✅ NEW: latest 3 posts for Home page section
+export const homePostsQuery = `
+  *[_type == "post"] | order(publishedAt desc)[0...3] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage { asset, alt }
+  }
+`
+
+// 2. GENERIC PAGE BY SLUG QUERY
 export const pageBySlugQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     _id,
@@ -181,11 +201,16 @@ export const pageBySlugQuery = `
     guaranteesSection {
       kicker,
       heading,
+      intro,
+      highlightWord,
+      statsHeading,
+      stats[] { _key, value, label },
       items[] {
         _key,
         title,
         description,
-        icon
+        icon,
+        points
       },
       primaryButtonText,
       primaryButtonLink,
@@ -224,6 +249,7 @@ export const pageBySlugQuery = `
   }
 ` as const
 
+// 3. FAQ PAGE SPECIFIC QUERY
 export const faqPageQuery = `
   *[_type == "page" && slug.current == "faq"][0] {
     _id,
@@ -255,9 +281,23 @@ export const faqPageQuery = `
   }
 `
 
+// 4. LEGAL PAGE SPECIFIC QUERY
 export const legalPageQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     title,
+    hero {
+      _type,
+      variant,
+      heading,
+      subheading,
+      paragraph,
+      image { asset, alt },
+      ctaText,
+      ctaLink,
+      secondCtaText,
+      secondCtaLink,
+      socialProofText
+    },
     content {
       heading,
       lastUpdated,
@@ -266,6 +306,7 @@ export const legalPageQuery = `
   }
 `
 
+// 5. BLOG INDEX PAGE DATA (page + all posts)
 export const blogPageDataQuery = `
   {
     "page": *[_type == "page" && slug.current == "blog"][0] {
@@ -290,10 +331,12 @@ export const blogPageDataQuery = `
       slug,
       publishedAt,
       excerpt,
-      mainImage
+      mainImage { asset, alt }
     }
   }
 `
+
+// --- POSTS / BLOG QUERIES ---
 
 export const postsQuery = `
   *[_type == "post"] | order(publishedAt desc) { 
@@ -302,7 +345,7 @@ export const postsQuery = `
     slug, 
     publishedAt, 
     excerpt, 
-    mainImage 
+    mainImage { asset, alt }
   }
 `
 
@@ -310,10 +353,12 @@ export const singlePostQuery = `
   *[_type == "post" && slug.current == $slug][0] { 
     title, 
     publishedAt, 
-    mainImage, 
+    mainImage { asset, alt }, 
     body 
   }
 `
+
+// --- SERVICES QUERIES ---
 
 export const servicesQuery = `
   *[_type == "service"] {
@@ -344,6 +389,8 @@ export const singleServiceQuery = `
     content
   }
 `
+
+// --- SITE SETTINGS ---
 
 export const siteSettingsQuery = `
   *[_type == "siteSettings"][0] {

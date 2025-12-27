@@ -17,95 +17,95 @@ export default function PricingSection({ data, className }: PricingProps) {
   const { heading, subheading, plans } = data
 
   return (
-    <section className={cn("relative py-16 sm:py-20 md:py-32 bg-primary/5 overflow-hidden", className)}>
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-border/70 to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-border/70 to-transparent" />
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+    <section className={cn("relative py-16 sm:py-20 md:py-32 bg-primary/5", className)}>
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-20 space-y-4">
-          <div className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider justify-center">
+          <div className="inline-flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider">
             <span className="w-8 h-[2px] bg-primary/50"></span>
             {subheading || "Special Offers"}
             <span className="w-8 h-[2px] bg-primary/50"></span>
           </div>
 
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1] text-balance">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-[1.1]">
             {heading}
           </h2>
 
-          <p className="text-base sm:text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             Limited-time deals designed to help you save on essential repairs, upgrades, and maintenance.
           </p>
-
-          <div className="flex justify-center pt-2">
-            <div className="inline-flex items-center gap-2 rounded-full border-2 border-primary/20 bg-background/70 px-4 py-1.5 text-sm font-semibold text-primary">
-              <TicketPercent className="w-4 h-4" />
-              Claim online & save instantly
-            </div>
-          </div>
         </div>
 
+        {/* Pricing Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {plans.map((plan) => (
             <div
               key={plan._key}
-              className="relative group rounded-3xl bg-background/85 border-2 border-border/75 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/25"
+              className="relative group bg-background border-2 border-border rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary/5 border-2 border-border/60" />
-              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-primary/5 border-2 border-border/60" />
+              {/* Ticket notches */}
+              <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border-2 border-border" />
+              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border-2 border-border" />
 
-              <div className="relative h-full w-full rounded-[1.35rem] border-[3px] border-dashed border-primary/35 p-6 py-8 flex flex-col text-center">
-                <div className="mb-5">
+              <div className="p-6 py-8 flex flex-col text-center">
+                {/* Price */}
+                <div className="mb-6">
                   {plan.currency && (
                     <div className="text-xs font-bold text-primary uppercase tracking-widest mb-1">
                       {plan.currency}
                     </div>
                   )}
 
-                  <div className="text-5xl md:text-6xl font-extrabold text-primary tracking-tighter leading-[0.9]">
+                  <div className="text-6xl md:text-7xl font-extrabold text-primary font-heading tracking-tighter leading-none">
                     {plan.price}
                   </div>
 
                   {plan.frequency && (
-                    <div className="text-sm font-bold text-primary/80 uppercase tracking-wider mt-2">
+                    <div className="text-sm font-bold text-primary uppercase tracking-wider mt-2">
                       {plan.frequency}
                     </div>
                   )}
                 </div>
 
+                {/* Divider */}
+                <div className="w-full h-px border-t-2 border-dashed border-border mb-6" />
+
+                {/* Title & Description */}
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-foreground font-heading leading-tight">
+                  <h3 className="text-xl font-bold text-foreground font-heading mb-2">
                     {plan.title}
                   </h3>
 
                   {plan.description && (
-                    <p className="text-sm text-muted-foreground font-medium mt-2">
+                    <p className="text-sm text-muted-foreground">
                       {plan.description}
                     </p>
                   )}
                 </div>
 
+                {/* CTA Button */}
                 <Button
                   asChild
                   size="lg"
-                  className="w-full h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold tracking-wide shadow-md shadow-primary/10"
+                  className="w-full h-12 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold tracking-wide"
                 >
                   <Link href={plan.ctaLink || "/contact"}>
                     {plan.ctaText || "CLAIM COUPON"}
                   </Link>
                 </Button>
 
+                {/* Features */}
                 {plan.features?.length ? (
-                  <div className="mt-6 pt-4 border-t border-dashed border-border/70 text-left">
+                  <div className="mt-6 pt-4 border-t border-dashed border-border text-left space-y-1">
                     {plan.features.map((line, idx) => (
-                      <p key={idx} className="text-[11px] text-muted-foreground leading-snug">
+                      <p key={idx} className="text-xs text-muted-foreground">
                         {line}
                       </p>
                     ))}
                   </div>
                 ) : (
-                  <div className="mt-6 pt-4 border-t border-dashed border-border/70 text-left">
-                    <p className="text-[11px] text-muted-foreground leading-snug">
+                  <div className="mt-6 pt-4 border-t border-dashed border-border text-left">
+                    <p className="text-xs text-muted-foreground">
                       Limited time offer. Terms may apply.
                     </p>
                   </div>
