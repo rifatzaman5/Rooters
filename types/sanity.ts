@@ -1,17 +1,15 @@
-// Base TypeScript types for Sanity content
-
 export interface SanityImage {
-  _type: 'image'
+  _type: "image"
   asset: {
     _ref: string
-    _type: 'reference'
+    _type: "reference"
   }
   alt?: string
   caption?: string
 }
 
 export interface SanitySlug {
-  _type: 'slug'
+  _type: "slug"
   current: string
 }
 
@@ -23,8 +21,6 @@ export interface SanityDocument {
   _rev: string
 }
 
-// Hero Section Type
-// Add this new interface for a single slide
 export interface HeroSlide {
   _key: string
   heading: string
@@ -38,12 +34,9 @@ export interface HeroSlide {
   socialProofText?: string
 }
 
-// Update the HeroSection interface
 export interface HeroSection {
-  _type: 'hero'
-  variant: 'home' | 'default'
-  
-  // These are the "flat" fields (used for default variant or single slide)
+  _type: "hero"
+  variant: "home" | "default"
   heading: string
   subheading?: string
   paragraph?: string
@@ -53,9 +46,7 @@ export interface HeroSection {
   secondCtaText?: string
   secondCtaLink?: string
   socialProofText?: string
-
-  // 👇 ADD THIS NEW FIELD
-  slides?: HeroSlide[] 
+  slides?: HeroSlide[]
 }
 
 export interface AboutUsFeature {
@@ -65,7 +56,7 @@ export interface AboutUsFeature {
 }
 
 export interface AboutUsSection {
-  _type: 'aboutUs'
+  _type: "aboutUs"
   heading: string
   subheading?: string
   description: string
@@ -84,7 +75,6 @@ export interface ServiceItem {
   mainImage: any
 }
 
-// 👇 UPDATED: TestimonialItem uses _key now
 export interface TestimonialItem {
   _key: string
   author: string
@@ -93,15 +83,13 @@ export interface TestimonialItem {
   rating: number
 }
 
-// 👇 NEW: Section Data Interface
 export interface TestimonialSectionData {
   heading: string
   description: string
-  mainImage: any // Sanity Image
+  mainImage: any
   testimonials: TestimonialItem[]
 }
 
-// Pricing Types
 export interface PricingPlan {
   _key: string
   title: string
@@ -116,13 +104,29 @@ export interface PricingPlan {
 }
 
 export interface PricingSection {
-  _type: 'pricing'
+  _type: "pricing"
   heading: string
   subheading?: string
   plans: PricingPlan[]
 }
 
+/** ✅ NEW: Guarantees section types */
+export interface GuaranteesItem {
+  _key: string
+  title: string
+  description?: string
+  icon?: string
+}
 
+export interface GuaranteesSectionData {
+  kicker?: string
+  heading: string
+  items: GuaranteesItem[]
+  primaryButtonText?: string
+  primaryButtonLink?: string
+  secondaryButtonText?: string
+  secondaryButtonLink?: string
+}
 
 export interface SiteLink {
   label: string
@@ -130,7 +134,7 @@ export interface SiteLink {
 }
 
 export interface SocialLink {
-  platform: 'facebook' | 'instagram' | 'linkedin'
+  platform: "facebook" | "instagram" | "linkedin"
   url: string
 }
 

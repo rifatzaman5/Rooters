@@ -238,11 +238,11 @@ export default async function Footer() {
               <p className="text-primary-foreground/70">{copyrightText}</p>
 
               <div className="flex items-center gap-6 text-primary-foreground/70">
-                <Link href="/privacy-policy" className="hover:text-primary-foreground transition-colors">
+                <Link href="/privacy" className="hover:text-primary-foreground transition-colors">
                   Privacy Policy
                 </Link>
-                <Link href="/terms-of-service" className="hover:text-primary-foreground transition-colors">
-                  Terms & Conditions
+                <Link href="/faq" className="hover:text-primary-foreground transition-colors">
+                  Faqs
                 </Link>
               </div>
             </div>

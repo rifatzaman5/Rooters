@@ -1,23 +1,27 @@
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import ServicesSection from '@/components/ServicesSection'
-import Footer from '@/components/Footer'
+import Navbar from "@/components/Navbar"
+import Hero from "@/components/Hero"
+import ServicesSection from "@/components/ServicesSection"
+import TestimonialsSection from "@/components/TestimonialsSection"
+import GuaranteesSection from "@/components/GuaranteesSection"
+import Footer from "@/components/Footer"
 
-import { client } from '@/lib/sanity/client'
-import { pageBySlugQuery, servicesQuery } from '@/lib/sanity/queries'
+import { client } from "@/lib/sanity/client"
+import { pageBySlugQuery, servicesQuery } from "@/lib/sanity/queries"
 
-import type { HeroSection, ServiceItem } from '@/types/sanity'
+import type { HeroSection, ServiceItem, TestimonialSectionData, GuaranteesSectionData } from "@/types/sanity"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 60
 
 type ServicesPageData = {
   hero: HeroSection | null
+  testimonialSection?: TestimonialSectionData | null
+  guaranteesSection?: GuaranteesSectionData | null
 } | null
 
 export default async function ServicesPage() {
   const [pageData, services] = await Promise.all([
-    client.fetch<ServicesPageData>(pageBySlugQuery, { slug: 'services' }),
+    client.fetch<ServicesPageData>(pageBySlugQuery, { slug: "services" }),
     client.fetch<ServiceItem[]>(servicesQuery),
   ])
 
@@ -37,6 +41,12 @@ export default async function ServicesPage() {
           </p>
         </section>
       )}
+
+      {/* ✅ Guarantees on Services page */}
+      {pageData?.guaranteesSection && <GuaranteesSection data={pageData.guaranteesSection} />}
+
+      {/* ✅ Testimonials on Services page */}
+      {pageData?.testimonialSection && <TestimonialsSection data={pageData.testimonialSection} />}
 
       <Footer />
     </main>

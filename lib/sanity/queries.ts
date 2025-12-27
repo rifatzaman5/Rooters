@@ -43,7 +43,6 @@ export const aboutUsQuery = `
 
 // --- PAGE QUERIES ---
 
-// 1. HOME PAGE QUERY (👇 THIS WAS THE MISSING PART)
 export const homePageQuery = `
   *[_type == "page" && slug.current == "home"][0] {
     _id,
@@ -53,8 +52,6 @@ export const homePageQuery = `
     hero {
       _type,
       variant,
-      
-      // Single fields (for fallback/static)
       heading,
       subheading,
       paragraph,
@@ -64,8 +61,6 @@ export const homePageQuery = `
       secondCtaText,
       secondCtaLink,
       socialProofText,
-
-      // 👇 THE CAROUSEL SLIDES (Crucial!)
       slides[] {
         _key,
         heading,
@@ -103,7 +98,6 @@ export const homePageQuery = `
         rating
       }
     },
-    
 
     pricing {
       heading,
@@ -120,16 +114,32 @@ export const homePageQuery = `
         ctaText,
         ctaLink
       }
+    },
+
+    guaranteesSection {
+      kicker,
+      heading,
+      items[] {
+        _key,
+        title,
+        description,
+        icon
+      },
+      primaryButtonText,
+      primaryButtonLink,
+      secondaryButtonText,
+      secondaryButtonLink
     }
   }
 `
 
-// 2. GENERIC PAGE BY SLUG QUERY
+// ✅ UPDATED: pageBySlugQuery now also fetches testimonialSection + guaranteesSection
 export const pageBySlugQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     _id,
     title,
     slug,
+
     hero {
       _type,
       variant,
@@ -143,6 +153,7 @@ export const pageBySlugQuery = `
       secondCtaLink,
       socialProofText
     },
+
     aboutUs {
       _type,
       heading,
@@ -153,6 +164,35 @@ export const pageBySlugQuery = `
       ctaText,
       ctaLink
     },
+
+    testimonialSection {
+      heading,
+      description,
+      mainImage { asset, alt },
+      testimonials[] {
+        _key,
+        author,
+        role,
+        quote,
+        rating
+      }
+    },
+
+    guaranteesSection {
+      kicker,
+      heading,
+      items[] {
+        _key,
+        title,
+        description,
+        icon
+      },
+      primaryButtonText,
+      primaryButtonLink,
+      secondaryButtonText,
+      secondaryButtonLink
+    },
+
     pricing {
       heading,
       subheading,
@@ -169,11 +209,13 @@ export const pageBySlugQuery = `
         ctaLink
       }
     },
+
     faq {
       title,
       description,
       items[] { question, answer }
     },
+
     content {
       heading,
       lastUpdated,
@@ -182,7 +224,6 @@ export const pageBySlugQuery = `
   }
 ` as const
 
-// 3. FAQ PAGE SPECIFIC QUERY
 export const faqPageQuery = `
   *[_type == "page" && slug.current == "faq"][0] {
     _id,
@@ -214,7 +255,6 @@ export const faqPageQuery = `
   }
 `
 
-// 4. LEGAL PAGE SPECIFIC QUERY
 export const legalPageQuery = `
   *[_type == "page" && slug.current == $slug][0] {
     title,
@@ -226,7 +266,6 @@ export const legalPageQuery = `
   }
 `
 
-// 5. BLOG INDEX PAGE DATA
 export const blogPageDataQuery = `
   {
     "page": *[_type == "page" && slug.current == "blog"][0] {
@@ -256,8 +295,6 @@ export const blogPageDataQuery = `
   }
 `
 
-// --- POSTS / BLOG QUERIES ---
-
 export const postsQuery = `
   *[_type == "post"] | order(publishedAt desc) { 
     _id, 
@@ -277,8 +314,6 @@ export const singlePostQuery = `
     body 
   }
 `
-
-// --- SERVICES QUERIES ---
 
 export const servicesQuery = `
   *[_type == "service"] {
@@ -309,8 +344,6 @@ export const singleServiceQuery = `
     content
   }
 `
-
-// --- SITE SETTINGS ---
 
 export const siteSettingsQuery = `
   *[_type == "siteSettings"][0] {

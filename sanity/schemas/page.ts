@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity"
 
 const slugOf = (doc: any) => doc?.slug?.current
+const isOneOf = (doc: any, slugs: string[]) => slugs.includes(slugOf(doc) || "")
 
 export default defineType({
   name: "page",
@@ -39,19 +40,19 @@ export default defineType({
       },
     }),
 
-    // 👇 UPDATED TESTIMONIALS SECTION
+    // ✅ Testimonials Section (HOME + SERVICES)
     defineField({
       name: "testimonialSection",
       title: "Testimonials Section",
       type: "object",
       options: { collapsible: true, collapsed: true },
-      hidden: ({ document }) => slugOf(document) !== "home",
+      hidden: ({ document }) => !isOneOf(document, ["home", "services"]),
       fields: [
         defineField({
           name: "heading",
           title: "Section Heading",
           type: "string",
-          initialValue: "The (Almost) 5-Star Insurance Brokerage",
+          initialValue: "Trusted by Local Homeowners",
         }),
         defineField({
           name: "description",
@@ -61,7 +62,7 @@ export default defineType({
         }),
         defineField({
           name: "mainImage",
-          title: "Feature Image (Person Pointing)",
+          title: "Feature Image (Optional)",
           type: "image",
           options: { hotspot: true },
           fields: [
@@ -69,26 +70,106 @@ export default defineType({
               name: "alt",
               type: "string",
               title: "Alternative Text",
-            }
-          ]
+            },
+          ],
         }),
-        // 👇 EMBEDDED LIST (Add items directly in Home Page)
         defineField({
           name: "testimonials",
           title: "Client Reviews",
           type: "array",
-          of: [{ type: "testimonial" }] // Uses the object defined in testimonial.ts
-        })
-      ]
+          of: [{ type: "testimonial" }],
+        }),
+      ],
     }),
-    // 👆 END UPDATE
 
+    // Pricing stays HOME only (you can change if you want)
     defineField({
       name: "pricing",
       title: "Pricing Section",
       type: "pricing",
       options: { collapsible: true, collapsed: true },
       hidden: ({ document }) => slugOf(document) !== "home",
+    }),
+
+    // ✅ Guarantees Section (HOME + SERVICES)
+    defineField({
+      name: "guaranteesSection",
+      title: "Guarantees Section",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      hidden: ({ document }) => !isOneOf(document, ["home", "services"]),
+      fields: [
+        defineField({
+          name: "kicker",
+          title: "Small Top Text",
+          type: "string",
+          initialValue: "Your Ultimate Satisfaction Assured",
+        }),
+        defineField({
+          name: "heading",
+          title: "Main Heading",
+          type: "string",
+          initialValue: "Ask About Our Hero Guarantees",
+        }),
+        defineField({
+          name: "items",
+          title: "Guarantee Items",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                  rows: 3,
+                }),
+                defineField({
+                  name: "icon",
+                  title: "Icon Name (Lucide)",
+                  type: "string",
+                  description: "Use one of: BadgeDollarSign, ShieldCheck, Home, SunMoon, ThumbsUp",
+                }),
+              ],
+              preview: {
+                select: { title: "title", subtitle: "icon" },
+              },
+            },
+          ],
+          validation: (Rule) => Rule.max(4).warning("Best with 4 items to match the layout."),
+        }),
+        defineField({
+          name: "primaryButtonText",
+          title: "Primary Button Text",
+          type: "string",
+          initialValue: "Financing",
+        }),
+        defineField({
+          name: "primaryButtonLink",
+          title: "Primary Button Link",
+          type: "string",
+          initialValue: "/contact",
+        }),
+        defineField({
+          name: "secondaryButtonText",
+          title: "Secondary Button Text",
+          type: "string",
+          initialValue: "Frequently Asked Questions",
+        }),
+        defineField({
+          name: "secondaryButtonLink",
+          title: "Secondary Button Link",
+          type: "string",
+          initialValue: "/faq",
+        }),
+      ],
     }),
 
     defineField({
@@ -142,6 +223,5 @@ export default defineType({
         defineField({ name: "body", title: "Content", type: "array", of: [{ type: "block" }] }),
       ],
     }),
-    
   ],
 })
