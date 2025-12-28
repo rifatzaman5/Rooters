@@ -1,28 +1,32 @@
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
 import ServicesSection from "@/components/ServicesSection"
+import ProcessSection from "@/components/ProcessSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import GuaranteesSection from "@/components/GuaranteesSection"
+import ServiceAreasSection from "@/components/ServiceAreasSection"
 import Footer from "@/components/Footer"
 
 import { client } from "@/lib/sanity/client"
-import { pageBySlugQuery, servicesQuery } from "@/lib/sanity/queries"
+import { pageBySlugQuery, servicesQuery, siteSettingsQuery } from "@/lib/sanity/queries"
 
-import type { HeroSection, ServiceItem, TestimonialSectionData, GuaranteesSectionData } from "@/types/sanity"
+import type { HeroSection, ServiceItem, TestimonialSectionData, GuaranteesSectionData, ProcessSectionData } from "@/types/sanity"
 
 export const dynamic = "force-dynamic"
 export const revalidate = 60
 
 type ServicesPageData = {
   hero: HeroSection | null
+  processSection?: ProcessSectionData | null
   testimonialSection?: TestimonialSectionData | null
   guaranteesSection?: GuaranteesSectionData | null
 } | null
 
 export default async function ServicesPage() {
-  const [pageData, services] = await Promise.all([
+  const [pageData, services, settings] = await Promise.all([
     client.fetch<ServicesPageData>(pageBySlugQuery, { slug: "services" }),
     client.fetch<ServiceItem[]>(servicesQuery),
+    client.fetch(siteSettingsQuery),
   ])
 
   return (
@@ -40,6 +44,12 @@ export default async function ServicesPage() {
             Add Service documents in Sanity (Content → Services).
           </p>
         </section>
+      )}
+
+      {pageData?.processSection && <ProcessSection data={pageData.processSection} />}
+
+      {settings?.serviceAreas && settings.serviceAreas.length > 0 && (
+        <ServiceAreasSection areas={settings.serviceAreas} />
       )}
 
       {pageData?.guaranteesSection && <GuaranteesSection data={pageData.guaranteesSection} />}

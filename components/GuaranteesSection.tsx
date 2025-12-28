@@ -57,26 +57,6 @@ function renderHighlightedHeading(heading: string, highlightWord?: string) {
   )
 }
 
-function renderStatsHeading(text: string) {
-  const phrase = "speaks for itself"
-  const lower = text.toLowerCase()
-  const idx = lower.indexOf(phrase)
-
-  if (idx < 0) return text
-
-  const before = text.slice(0, idx)
-  const match = text.slice(idx, idx + phrase.length)
-  const after = text.slice(idx + phrase.length)
-
-  return (
-    <>
-      {before}
-      <span className="text-primary">{match}</span>
-      {after}
-    </>
-  )
-}
-
 interface Props {
   data?: GuaranteesSectionData
   className?: string
@@ -90,7 +70,6 @@ export default function GuaranteesSection({ data, className }: Props) {
   const intro =
     data.intro ||
     "We prioritize clarity and honesty. Our communication avoids jargon and fine print so you feel confident at every step."
-  const statsHeading = data.statsHeading || "Our track record speaks for itself"
 
   const primaryButtonText = data.primaryButtonText || "Get Quote Now"
   const primaryButtonLink = data.primaryButtonLink || "/contact"
@@ -123,33 +102,6 @@ export default function GuaranteesSection({ data, className }: Props) {
             {intro}
           </p>
         </div>
-
-        {/* Stats strip (optional) */}
-        {data.stats?.length ? (
-          <div className="max-w-5xl mx-auto mb-10 sm:mb-12">
-            <div className="rounded-lg border border-border bg-background p-6 sm:p-8 shadow-sm">
-              <div className="text-center font-bold text-foreground mb-6 text-lg">
-                {renderStatsHeading(statsHeading)}
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                {data.stats.slice(0, 3).map((s) => (
-                  <div
-                    key={s._key}
-                    className="rounded-lg border border-border bg-background/50 p-5 text-center"
-                  >
-                    <div className="text-3xl sm:text-4xl font-bold text-primary">
-                      {s.value}
-                    </div>
-                    <div className="mt-2 text-sm font-semibold text-foreground">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : null}
 
         {/* 2x2 cards */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">

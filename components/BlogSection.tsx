@@ -49,8 +49,8 @@ export default function BlogSection({
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid - wider gap */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {posts.slice(0, 3).map((post) => (
             <Card
               key={post._id}

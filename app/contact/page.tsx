@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
+import ServiceAreasSection from '@/components/ServiceAreasSection'
 import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { MapPin, Phone, Mail, Clock } from 'lucide-react'
@@ -155,6 +156,11 @@ export default async function ContactPage() {
           </div>
         </div>
       </div>
+
+      {/* Service Areas */}
+      {settings?.serviceAreas && settings.serviceAreas.length > 0 && (
+        <ServiceAreasSection areas={settings.serviceAreas} />
+      )}
 
       <Footer />
     </main>

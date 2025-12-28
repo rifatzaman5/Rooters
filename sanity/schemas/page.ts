@@ -29,6 +29,63 @@ export default defineType({
       options: { collapsible: true, collapsed: true },
     }),
 
+    // ✅ NEW: Stats Section (HOME only)
+    defineField({
+      name: "statsSection",
+      title: "Stats Section",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      hidden: ({ document }) => slugOf(document) !== "home",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          initialValue: "Trusted by Thousands",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "text",
+          rows: 2,
+        }),
+        defineField({
+          name: "stats",
+          title: "Stats",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "value",
+                  title: "Value",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "label",
+                  title: "Label",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "icon",
+                  title: "Icon (Lucide)",
+                  type: "string",
+                  description: "e.g., Users, Star, Award, Shield",
+                }),
+              ],
+              preview: {
+                select: { title: "value", subtitle: "label" },
+              },
+            },
+          ],
+          validation: (Rule) => Rule.max(4).warning("Best with 3-4 stats"),
+        }),
+      ],
+    }),
+
     defineField({
       name: "aboutUs",
       title: "About Us Section",
@@ -40,7 +97,64 @@ export default defineType({
       },
     }),
 
-    // ✅ Testimonials Section (HOME + SERVICES)
+    // ✅ NEW: Process Section (SERVICES only)
+    defineField({
+      name: "processSection",
+      title: "Process/How It Works Section",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      hidden: ({ document }) => slugOf(document) !== "services",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          initialValue: "How It Works",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "text",
+          rows: 2,
+        }),
+        defineField({
+          name: "steps",
+          title: "Steps",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Step Title",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "description",
+                  title: "Description",
+                  type: "text",
+                  rows: 3,
+                }),
+                defineField({
+                  name: "icon",
+                  title: "Icon (Lucide)",
+                  type: "string",
+                  description: "e.g., Phone, Calendar, Wrench, CheckCircle",
+                }),
+              ],
+              preview: {
+                select: { title: "title" },
+              },
+            },
+          ],
+          validation: (Rule) => Rule.max(4).warning("Best with 3-4 steps"),
+        }),
+      ],
+    }),
+
+    // Testimonials (HOME + SERVICES)
     defineField({
       name: "testimonialSection",
       title: "Testimonials Section",
@@ -82,7 +196,7 @@ export default defineType({
       ],
     }),
 
-    // Pricing stays HOME only (you can change if you want)
+    // Pricing (HOME only)
     defineField({
       name: "pricing",
       title: "Pricing Section",
@@ -91,7 +205,7 @@ export default defineType({
       hidden: ({ document }) => slugOf(document) !== "home",
     }),
 
-    // ✅ Guarantees Section (HOME + SERVICES)
+    // Guarantees (HOME + SERVICES)
     defineField({
       name: "guaranteesSection",
       title: "Guarantees Section",
@@ -111,8 +225,6 @@ export default defineType({
           type: "string",
           initialValue: "Ask About Our Hero Guarantees",
         }),
-
-        // ✅ NEW: Intro + heading highlight
         defineField({
           name: "intro",
           title: "Intro Paragraph",
@@ -123,43 +235,9 @@ export default defineType({
           name: "highlightWord",
           title: "Heading Highlight Word (Optional)",
           type: "string",
-          description: 'Example: "Australians" (will be colored in the heading).',
+          description: 'Example: "Australians"',
         }),
-
-        // ✅ NEW: Stats strip (optional)
-        defineField({
-          name: "statsHeading",
-          title: "Stats Heading",
-          type: "string",
-          initialValue: "Our track record speaks for itself",
-        }),
-        defineField({
-          name: "stats",
-          title: "Track Record Stats (Up to 3)",
-          type: "array",
-          of: [
-            {
-              type: "object",
-              fields: [
-                defineField({
-                  name: "value",
-                  title: "Value",
-                  type: "string",
-                  validation: (Rule) => Rule.required(),
-                }),
-                defineField({
-                  name: "label",
-                  title: "Label",
-                  type: "string",
-                  validation: (Rule) => Rule.required(),
-                }),
-              ],
-              preview: { select: { title: "value", subtitle: "label" } },
-            },
-          ],
-          validation: (Rule) => Rule.max(3).warning("Best with 3 stats for the layout."),
-        }),
-
+       
         defineField({
           name: "items",
           title: "Guarantee Items",
@@ -185,13 +263,12 @@ export default defineType({
                   title: "Bullet Points",
                   type: "array",
                   of: [{ type: "string" }],
-                  description: "Add 2–4 bullets for this card.",
                 }),
                 defineField({
                   name: "icon",
                   title: "Icon Name (Lucide)",
                   type: "string",
-                  description: "Use one of: BadgeDollarSign, ShieldCheck, Home, SunMoon, ThumbsUp",
+                  description: "BadgeDollarSign, ShieldCheck, Home, etc.",
                 }),
               ],
               preview: {
@@ -199,9 +276,8 @@ export default defineType({
               },
             },
           ],
-          validation: (Rule) => Rule.max(4).warning("Best with 4 items to match the layout."),
+          validation: (Rule) => Rule.max(4),
         }),
-
         defineField({
           name: "primaryButtonText",
           title: "Primary Button Text",

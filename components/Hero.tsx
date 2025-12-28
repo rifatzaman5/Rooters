@@ -26,7 +26,6 @@ export default function Hero({ data, className }: HeroProps) {
   const validSlides = slides.filter((s) => s?.heading || s?.image)
   const totalSlides = validSlides.length
 
-  // Nothing to render if no valid slide
   if (!validSlides.length) return null
 
   const next = React.useCallback(() => {
@@ -100,29 +99,28 @@ export default function Hero({ data, className }: HeroProps) {
                 aria-hidden={!isActive}
               >
                 <div className="container mx-auto px-4 md:px-6 relative z-10 pt-24 sm:pt-28 pb-16 lg:pt-32 lg:pb-20">
-                  {/* better height control */}
                   <div className="min-h-[calc(78vh-4rem)] lg:min-h-[620px] flex items-center">
                     <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
                       
                       {/* TEXT FIRST on mobile */}
-                      <div className="flex flex-col gap-6 text-center lg:text-left order-1 lg:order-1 select-none">
+                      <div className="flex flex-col gap-5 text-center lg:text-left order-1 lg:order-1 select-none">
                         {slide.subheading && (
-                          <div className="inline-flex w-fit mx-auto lg:mx-0 items-center border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary rounded-md">
+                          <div className="inline-flex w-fit mx-auto lg:mx-0 items-center border border-primary/20 bg-primary/10 px-3.5 py-1.5 text-sm font-medium text-primary rounded-md">
                             {slide.subheading}
                           </div>
                         )}
 
-                        <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-foreground">
+                        <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.08] tracking-tight text-foreground">
                           {slide.heading}
                         </h1>
 
                         {slide.paragraph && (
-                          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                          <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
                             {slide.paragraph}
                           </p>
                         )}
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-1">
                           {slide.ctaText && slide.ctaLink && (
                             <Button asChild size="lg" className="h-12 px-8 text-base shadow-sm pointer-events-auto">
                               <Link href={slide.ctaLink} className="flex items-center gap-2">
@@ -140,7 +138,7 @@ export default function Hero({ data, className }: HeroProps) {
                         </div>
 
                         {/* Social proof row */}
-                        <div className="flex items-center justify-center lg:justify-start gap-3 text-sm text-muted-foreground pt-1">
+                        <div className="flex items-center justify-center lg:justify-start gap-2.5 text-sm text-muted-foreground">
                           <div className="flex text-primary">
                             {[1, 2, 3, 4, 5].map((i) => (
                               <Star key={i} className="w-4 h-4 fill-current" />

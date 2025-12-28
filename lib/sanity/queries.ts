@@ -78,6 +78,17 @@ export const homePageQuery = `
       }
     },
 
+    statsSection {
+      heading,
+      description,
+      stats[] {
+        _key,
+        value,
+        label,
+        icon
+      }
+    },
+
     aboutUs {
       _type,
       heading,
@@ -124,8 +135,7 @@ export const homePageQuery = `
       heading,
       intro,
       highlightWord,
-      statsHeading,
-      stats[] { _key, value, label },
+      
       items[] {
         _key,
         title,
@@ -198,13 +208,23 @@ export const pageBySlugQuery = `
       }
     },
 
+    processSection {
+      heading,
+      description,
+      steps[] {
+        _key,
+        title,
+        description,
+        icon
+      }
+    },
+
     guaranteesSection {
       kicker,
       heading,
       intro,
       highlightWord,
-      statsHeading,
-      stats[] { _key, value, label },
+      
       items[] {
         _key,
         title,
@@ -407,6 +427,7 @@ export const siteSettingsQuery = `
     hours[] { label, value },
     footerLinks[] { label, href },
     socials[] { platform, url },
+    serviceAreas[] { city, region },
     contactPage {
       infoHeading,
       infoText,
@@ -425,3 +446,15 @@ export const siteSettingsQuery = `
     footerLegal
   }
 ` as const
+
+// --- TEAM QUERY ---
+export const teamQuery = `
+  *[_type == "teamMember"] | order(order asc) {
+    _id,
+    name,
+    role,
+    bio,
+    image { asset, alt },
+    order
+  }
+`

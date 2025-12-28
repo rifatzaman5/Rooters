@@ -209,6 +209,15 @@ export default function Navbar() {
                     </NavigationMenuLink>
                   </NavigationMenuItem>
 
+                  {/* FAQ */}
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link href="/faq" className={navLinkClass("/faq")}>
+                        FAQ
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+
                   {/* Contact */}
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
@@ -342,6 +351,16 @@ export default function Navbar() {
                   )}
                 >
                   Blog
+                </Link>
+                <Link
+                  href="/faq"
+                  onClick={closeMobileMenu}
+                  className={cn(
+                    "block py-2.5 px-2 font-semibold transition-colors rounded-md border-b border-border hover:bg-accent",
+                    isActiveMobile("/faq") ? "text-primary bg-accent" : "text-foreground hover:text-primary"
+                  )}
+                >
+                  FAQ
                 </Link>
                 <Link
                   href="/contact"

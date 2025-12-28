@@ -36,13 +36,15 @@ export default async function Footer() {
   const brandName = settings?.brandName || "Rooters"
   const brandDescription =
     settings?.brandDescription ||
-    "Your trusted partner for eco-friendly plumbing and HVAC solutions. Serving the community with integrity and excellence."
+    "Your trusted partner for eco-friendly plumbing and HVAC solutions."
 
   const quickLinks =
     settings?.footerLinks || [
       { label: "Home", href: "/" },
-      { label: "About Us", href: "/about" },
+      { label: "About", href: "/about" },
       { label: "Services", href: "/services" },
+      { label: "Blog", href: "/blog" },
+      { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
     ]
 
@@ -58,23 +60,27 @@ export default async function Footer() {
     settings?.footerLegal || `© ${new Date().getFullYear()} ${brandName}. All rights reserved.`
 
   return (
-    <footer className="relative overflow-visible bg-background mt-16 md:mt-20">
+    <footer className="relative overflow-visible bg-background mt-40 sm:mt-28 md:mt-40">
       {/* Footer panel */}
       <div className="relative bg-primary text-primary-foreground rounded-t-3xl">
-        {/* CTA (overlapping) */}
-        <div className="absolute left-0 right-0 -top-20 sm:-top-16 md:-top-24 z-30">
+        {/* CTA (overlapping) - Fixed positioning */}
+        <div className="absolute left-0 right-0 -top-36 sm:-top-20 md:-top-40 z-30">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="mx-auto max-w-5xl rounded-lg bg-background text-foreground border border-border shadow-lg px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-9">
-              <div className="flex flex-col items-center text-center gap-4">
-                <h3 className="font-heading text-lg sm:text-2xl md:text-3xl font-bold leading-tight">
-                  Book a free consultation with our experts today.
+            <div className="mx-auto max-w-5xl rounded-xl bg-background text-foreground border border-border shadow-xl px-5 py-6 sm:px-7 sm:py-8 md:px-10 md:py-9">
+              <div className="flex flex-col items-center text-center gap-4 sm:gap-5">
+                <div className="inline-flex items-center gap-2 border border-primary/20 bg-primary/5 px-3 py-1 rounded-full text-xs font-medium text-primary">
+                  Free Consultation
+                </div>
+                
+                <h3 className="font-heading text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight max-w-2xl">
+                  Book a free consultation with our experts today
                 </h3>
 
-                <p className="text-muted-foreground text-sm sm:text-base max-w-2xl">
+                <p className="text-muted-foreground text-sm sm:text-base max-w-xl">
                   Quick scheduling, transparent pricing, and professional service you can trust.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                   <Link
                     href="/contact"
                     className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-primary text-primary-foreground font-semibold
@@ -97,8 +103,8 @@ export default async function Footer() {
           </div>
         </div>
 
-        {/* Space for CTA overlap */}
-        <div className="pt-44 sm:pt-32 md:pt-24">
+        {/* Space for CTA overlap - responsive padding */}
+        <div className="pt-40 sm:pt-36 md:pt-40">
           <div className="container mx-auto px-4 md:px-6">
             {/* Divider */}
             <div className="h-px w-full bg-primary-foreground/10 mb-8 md:mb-10" />
@@ -107,14 +113,14 @@ export default async function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-8">
               {/* Brand + Social */}
               <div className="lg:col-span-4 space-y-4">
-                <div className="flex items-center gap-2.5">
+                <Link href="/" className="flex items-center gap-2.5 w-fit">
                   <div className="h-9 w-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
                     <div className="h-4 w-4 rounded-full bg-primary-foreground" />
                   </div>
                   <span className="text-xl font-heading font-bold tracking-tight">
                     {brandName}
                   </span>
-                </div>
+                </Link>
 
                 <p className="text-primary-foreground/75 leading-relaxed text-sm max-w-sm">
                   {brandDescription}
@@ -142,7 +148,7 @@ export default async function Footer() {
 
               {/* Quick Links */}
               <div className="lg:col-span-2">
-                <h4 className="font-bold text-base mb-3.5">About</h4>
+                <h4 className="font-bold text-base mb-3.5">Quick Links</h4>
                 <ul className="space-y-2.5">
                   {quickLinks.map((l, idx) => (
                     <li key={idx}>
@@ -238,11 +244,14 @@ export default async function Footer() {
               <p className="text-primary-foreground/60">{copyrightText}</p>
 
               <div className="flex items-center gap-5 text-primary-foreground/60">
+                <Link href="/terms" className="hover:text-primary-foreground transition-colors">
+                  Terms
+                </Link>
                 <Link href="/privacy" className="hover:text-primary-foreground transition-colors">
-                  Privacy Policy
+                  Privacy
                 </Link>
                 <Link href="/faq" className="hover:text-primary-foreground transition-colors">
-                  FAQs
+                  FAQ
                 </Link>
               </div>
             </div>

@@ -9,7 +9,7 @@ export default function BackToTopButton() {
 
   React.useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > 400)
+      setVisible(window.scrollY > 300)
     }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
@@ -27,13 +27,14 @@ export default function BackToTopButton() {
       onClick={scrollToTop}
       className={cn(
         "fixed bottom-6 right-6 z-[60]",
-        "h-12 w-12 rounded-full",
-        "border border-border/70 bg-background/90 backdrop-blur",
-        "text-foreground shadow-lg shadow-primary/10",
+        "h-11 w-11 rounded-full",
+        "border border-border bg-background/95 backdrop-blur-sm",
+        "text-foreground shadow-md",
         "transition-all duration-300",
-        "hover:bg-primary hover:text-primary-foreground hover:border-primary/30",
+        "hover:bg-primary hover:text-primary-foreground hover:border-primary hover:shadow-lg",
+        "active:scale-95",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       )}
     >
       <ArrowUp className="h-5 w-5 mx-auto" />

@@ -55,8 +55,11 @@ export default function AboutUs({ data, className }: AboutUsProps) {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Image Side - LEFT (changed from right) */}
+          {/* Image Side - LEFT */}
           <div className="lg:col-span-5 relative group order-2 lg:order-1">
+            {/* Subtle decorative element */}
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-transparent rounded-2xl -z-10 opacity-50" />
+            
             <div className="relative aspect-[3/4] w-full rounded-lg overflow-hidden border border-border shadow-lg bg-muted">
               {aboutImg ? (
                 <img
@@ -72,7 +75,7 @@ export default function AboutUs({ data, className }: AboutUsProps) {
             </div>
           </div>
 
-          {/* Content Side - RIGHT (changed from left) */}
+          {/* Content Side - RIGHT */}
           <div className="lg:col-span-7 space-y-8 order-1 lg:order-2">
             {/* Header */}
             <div className="space-y-4">

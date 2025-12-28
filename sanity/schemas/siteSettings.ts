@@ -18,10 +18,9 @@ export default defineType({
       type: "text",
       rows: 3,
       initialValue:
-        "Your trusted partner for eco-friendly plumbing and HVAC solutions. Serving the community with integrity and excellence.",
+        "Your trusted partner for eco-friendly plumbing and HVAC solutions.",
     }),
 
-    // Contact details (used in Contact page + Footer)
     defineField({
       name: "contact",
       title: "Contact Details",
@@ -37,7 +36,6 @@ export default defineType({
           name: "phoneHref",
           title: "Phone Link (tel:)",
           type: "string",
-          description: "Example: tel:+15551234567",
           initialValue: "tel:+15551234567",
         }),
         defineField({
@@ -76,8 +74,8 @@ export default defineType({
           type: "object",
           name: "hoursItem",
           fields: [
-            defineField({ name: "label", title: "Label", type: "string" }), // e.g. "Mon - Fri"
-            defineField({ name: "value", title: "Value", type: "string" }), // e.g. "8am - 6pm"
+            defineField({ name: "label", title: "Label", type: "string" }),
+            defineField({ name: "value", title: "Value", type: "string" }),
           ],
           preview: { select: { title: "label", subtitle: "value" } },
         },
@@ -88,7 +86,34 @@ export default defineType({
       ],
     }),
 
-    // Footer links
+    // ✅ NEW: Service Areas
+    defineField({
+      name: "serviceAreas",
+      title: "Service Areas",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({
+              name: "city",
+              title: "City",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "region",
+              title: "Region/State",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: { title: "city", subtitle: "region" },
+          },
+        },
+      ],
+    }),
+
     defineField({
       name: "footerLinks",
       title: "Footer Quick Links",
@@ -112,7 +137,6 @@ export default defineType({
       ],
     }),
 
-    // Socials
     defineField({
       name: "socials",
       title: "Social Links",
@@ -141,7 +165,6 @@ export default defineType({
       ],
     }),
 
-    // Contact page text + form labels
     defineField({
       name: "contactPage",
       title: "Contact Page Content",
@@ -158,27 +181,23 @@ export default defineType({
           title: "Left Side Text",
           type: "text",
           rows: 3,
-          initialValue:
-            "Fill out the form or call us directly. We respond quickly — especially for emergencies.",
+          initialValue: "Fill out the form or call us directly.",
         }),
-
         defineField({ name: "formHeading", title: "Form Heading", type: "string", initialValue: "Send us a message" }),
         defineField({ name: "nameLabel", title: "Name Label", type: "string", initialValue: "Name" }),
         defineField({ name: "phoneLabel", title: "Phone Label", type: "string", initialValue: "Phone" }),
         defineField({ name: "emailLabel", title: "Email Label", type: "string", initialValue: "Email" }),
         defineField({ name: "messageLabel", title: "Message Label", type: "string", initialValue: "Message" }),
-
         defineField({ name: "namePlaceholder", title: "Name Placeholder", type: "string", initialValue: "John Doe" }),
         defineField({ name: "phonePlaceholder", title: "Phone Placeholder", type: "string", initialValue: "(555) 000-0000" }),
         defineField({ name: "emailPlaceholder", title: "Email Placeholder", type: "string", initialValue: "john@example.com" }),
         defineField({ name: "messagePlaceholder", title: "Message Placeholder", type: "string", initialValue: "How can we help?" }),
-
         defineField({ name: "submitText", title: "Submit Button Text", type: "string", initialValue: "Send Message" }),
         defineField({
           name: "disclaimer",
           title: "Form Disclaimer",
           type: "string",
-          initialValue: "We’ll get back to you as soon as possible.",
+          initialValue: "We'll get back to you soon.",
         }),
       ],
     }),

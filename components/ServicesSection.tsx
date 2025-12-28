@@ -55,7 +55,8 @@ export default function ServicesSection({
   const displayedServices =
     typeof limit === "number" ? services.slice(0, limit) : services
 
-  const sectionClass = "bg-muted/30"
+  // Different backgrounds for variants
+  const sectionClass = variant === "tiles" ? "bg-background" : "bg-muted/30"
 
   return (
     <section className={cn("relative py-16 sm:py-20 md:py-24 overflow-hidden", sectionClass, className)}>
@@ -80,16 +81,12 @@ export default function ServicesSection({
           </p>
         </div>
 
-        {/* ==============================
-            VARIANT A: TILES (HOME)
-           ============================== */}
+        {/* VARIANT A: TILES (HOME) */}
         {variant === "tiles" && (
           <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {displayedServices.map((service, idx) => {
+            {displayedServices.map((service) => {
               const Icon =
                 service.icon && iconMap[service.icon] ? iconMap[service.icon] : Wrench
-
-              const highlighted = true;
 
               return (
                 <Link
@@ -100,12 +97,11 @@ export default function ServicesSection({
                     "transition-all duration-200",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                     "hover:shadow-md hover:-translate-y-0.5",
-                    highlighted ? "bg-primary text-primary-foreground shadow-sm" : "bg-secondary text-secondary-foreground"
+                    "bg-primary text-primary-foreground shadow-sm"
                   )}
                 >
                   <div className="flex flex-col items-center text-center gap-3.5">
                     <Icon className="h-10 w-10 sm:h-12 sm:w-12" />
-
                     <div className="text-sm sm:text-base font-bold uppercase tracking-wide leading-snug">
                       {service.title}
                     </div>
@@ -116,9 +112,7 @@ export default function ServicesSection({
           </div>
         )}
 
-        {/* ==============================
-            VARIANT B: CARDS (SERVICES PAGE)
-           ============================== */}
+        {/* VARIANT B: CARDS (SERVICES PAGE) */}
         {variant === "cards" && (
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {displayedServices.map((service) => {
@@ -138,7 +132,6 @@ export default function ServicesSection({
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   )}
                 >
-                  {/* Top row */}
                   <div className="flex items-center gap-3.5">
                     {hasImg ? (
                       <img
@@ -183,7 +176,7 @@ export default function ServicesSection({
               className="px-8 h-12 text-base shadow-sm"
             >
               <Link href="/services" className="flex items-center gap-2">
-                View All Services <ArrowRight className="h-4 w-4" />
+                View All Services <ArrowRight className="h-4 h-4" />
               </Link>
             </Button>
           </div>

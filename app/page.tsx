@@ -1,9 +1,9 @@
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
+import StatsSection from "@/components/StatsSection"
 import AboutUs from "@/components/AboutUs"
 import ServicesSection from "@/components/ServicesSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
-import PricingSection from "@/components/PricingSection"
 import GuaranteesSection from "@/components/GuaranteesSection"
 import BlogSection from "@/components/BlogSection"
 import Footer from "@/components/Footer"
@@ -24,28 +24,23 @@ export default async function Home() {
     <main className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
+      {/* Hero - Large visual impact */}
       {pageData?.hero && <Hero data={pageData.hero} />}
 
-  
+      {/* Stats - Thin horizontal bar (DIFFERENT from services) */}
+      {pageData?.statsSection && <StatsSection data={pageData.statsSection} />}
 
+      {/* Services - Grid of tiles */}
       {services && services.length > 0 && (
         <ServicesSection services={services} limit={4} showViewAll={true} variant="tiles" />
       )}
-       {pageData?.aboutUs && <AboutUs data={pageData.aboutUs} />}
 
- {pageData?.guaranteesSection && <GuaranteesSection data={pageData.guaranteesSection} />}
+      {/* Rest of sections */}
+      {pageData?.aboutUs && <AboutUs data={pageData.aboutUs} />}
 
+      {pageData?.guaranteesSection && <GuaranteesSection data={pageData.guaranteesSection} />}
 
-
-       {pageData?.testimonialSection && <TestimonialsSection data={pageData.testimonialSection} />}
-
-
-      
-
-   
-     
-     
-      {/* {pageData?.pricing && <PricingSection data={pageData.pricing} />} */}
+      {pageData?.testimonialSection && <TestimonialsSection data={pageData.testimonialSection} />}
 
       {posts && posts.length > 0 && <BlogSection posts={posts} />}
 

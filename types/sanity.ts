@@ -1,3 +1,5 @@
+// types/sanity.ts
+
 export interface SanityImage {
   _type: "image"
   asset: {
@@ -110,7 +112,6 @@ export interface PricingSection {
   plans: PricingPlan[]
 }
 
-/** ✅ UPDATED: Guarantees section types (now supports intro, stats, bullet points) */
 export interface GuaranteesStat {
   _key: string
   value: string
@@ -125,20 +126,60 @@ export interface GuaranteesItem {
   points?: string[]
 }
 
+// Remove stats from GuaranteesSectionData
 export interface GuaranteesSectionData {
   kicker?: string
   heading: string
-
   intro?: string
   highlightWord?: string
-  statsHeading?: string
-  stats?: GuaranteesStat[]
-
   items: GuaranteesItem[]
   primaryButtonText?: string
   primaryButtonLink?: string
   secondaryButtonText?: string
   secondaryButtonLink?: string
+}
+// ✅ NEW: Stats Section
+export interface StatItem {
+  _key: string
+  value: string
+  label: string
+  icon?: string
+}
+
+export interface StatsSectionData {
+  heading?: string
+  description?: string
+  stats: StatItem[]
+}
+
+// ✅ NEW: Process Section
+export interface ProcessStep {
+  _key: string
+  title: string
+  description: string
+  icon?: string
+}
+
+export interface ProcessSectionData {
+  heading: string
+  description?: string
+  steps: ProcessStep[]
+}
+
+// ✅ NEW: Service Area
+export interface ServiceArea {
+  city: string
+  region?: string
+}
+
+// ✅ NEW: Team Member
+export interface TeamMember {
+  _id: string
+  name: string
+  role: string
+  bio: string
+  image: SanityImage
+  order: number
 }
 
 export interface SiteLink {
@@ -170,6 +211,7 @@ export interface SiteSettings {
   hours?: HoursItem[]
   footerLinks?: SiteLink[]
   socials?: SocialLink[]
+  serviceAreas?: ServiceArea[]
   contactPage?: {
     infoHeading?: string
     infoText?: string

@@ -6,6 +6,7 @@ import testimonial from "./testimonial"
 import siteSettings from "./siteSettings"
 import pricing from "./pricing"
 import post from "./post"
+import teamMember from "./teamMember"
 
 export const schemaTypes = [
   hero,
@@ -16,4 +17,5 @@ export const schemaTypes = [
   siteSettings,
   pricing,
   post,
+  teamMember,
 ]
