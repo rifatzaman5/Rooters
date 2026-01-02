@@ -82,7 +82,7 @@ export default async function Footer() {
 
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                   <Link
-                    href="/contact"
+                    href="tel:+1 818-616-6963"
                     className="inline-flex items-center justify-center h-11 px-6 rounded-md bg-primary text-primary-foreground font-semibold
                                hover:bg-primary/90 transition-colors w-full sm:w-auto shadow-sm"
                   >
