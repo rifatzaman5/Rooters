@@ -39,3 +39,8 @@ next-env.d.ts
 # sanity
 .sanity
 
+
+# sanity exports / deploy output
+backup.tar.gz
+backup*.tar.gz
+/dist/
