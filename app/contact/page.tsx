@@ -92,7 +92,7 @@ export default async function ContactPage() {
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-base mb-0.5">Hours</h3>
+                    <h3 className="font-bold text-base mb-0.5">Hoursss</h3>
                     <div className="text-sm text-muted-foreground space-y-0.5">
                       {hours.map((h, i) => (
                         <div key={i}>{h.label}: {h.value}</div>
