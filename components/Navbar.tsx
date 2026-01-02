@@ -233,7 +233,7 @@ export default function Navbar() {
             {/* CTA + Mobile toggle */}
             <div className="flex items-center gap-3">
               <Button asChild size="sm" className="hidden md:inline-flex font-semibold">
-                <Link href="/contact">Get a Quote</Link>
+                <Link href="tel:+1 818-616-6963">Get a Quote</Link>
               </Button>
 
               <button
