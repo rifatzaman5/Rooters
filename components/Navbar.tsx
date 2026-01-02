@@ -128,7 +128,7 @@ export default function Navbar() {
                   textColorClass
                 )}
               >
-                Rooters
+                Heating and Cooling
               </span>
             </Link>
 
@@ -376,7 +376,7 @@ export default function Navbar() {
                 {/* Mobile CTA */}
                 <div className="pt-4">
                   <Button asChild className="w-full" onClick={closeMobileMenu}>
-                    <Link href="/contact">Get a Quote</Link>
+                    <Link href="tel:+1 818-616-6963">Get a Quote</Link>
                   </Button>
                 </div>
               </div>
