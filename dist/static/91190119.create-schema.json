@@ -1,0 +1,1911 @@
+[
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Home (Carousel)",
+              "value": "home"
+            },
+            {
+              "title": "Inner Page (Static)",
+              "value": "default"
+            }
+          ]
+        },
+        "initialValue": "home",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "home",
+                  "default"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "variant",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "heading",
+                "type": "string"
+              },
+              {
+                "name": "subheading",
+                "type": "string",
+                "title": "Subheading (Badge)"
+              },
+              {
+                "rows": 3,
+                "name": "paragraph",
+                "type": "text"
+              },
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "fields": [
+                  {
+                    "name": "alt",
+                    "type": "string",
+                    "title": "Alt Text"
+                  }
+                ],
+                "name": "image",
+                "type": "image",
+                "title": "Hero Image"
+              },
+              {
+                "initialValue": "Get a Quote",
+                "name": "ctaText",
+                "type": "string",
+                "title": "Primary Button Text"
+              },
+              {
+                "initialValue": "/contact",
+                "name": "ctaLink",
+                "type": "string",
+                "title": "Primary Button Link"
+              },
+              {
+                "initialValue": "Contact Support",
+                "name": "secondCtaText",
+                "type": "string",
+                "title": "Secondary Button Text"
+              },
+              {
+                "initialValue": "/contact",
+                "name": "secondCtaLink",
+                "type": "string",
+                "title": "Secondary Button Link"
+              },
+              {
+                "initialValue": "Trusted by 500+ locals",
+                "name": "socialProofText",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "title": "Slide"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "slides",
+        "type": "array",
+        "title": "Carousel Slides"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "hidden": "conditional",
+        "name": "subheading",
+        "type": "string",
+        "title": "Subheading (Badge)"
+      },
+      {
+        "rows": 3,
+        "hidden": "conditional",
+        "name": "paragraph",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "image",
+        "type": "image",
+        "title": "Hero Image"
+      },
+      {
+        "initialValue": "Get a Quote",
+        "hidden": "conditional",
+        "name": "ctaText",
+        "type": "string",
+        "title": "Primary Button Text"
+      },
+      {
+        "initialValue": "/contact",
+        "hidden": "conditional",
+        "name": "ctaLink",
+        "type": "string",
+        "title": "Primary Button Link"
+      },
+      {
+        "initialValue": "Contact Support",
+        "hidden": "conditional",
+        "name": "secondCtaText",
+        "type": "string",
+        "title": "Secondary Button Text"
+      },
+      {
+        "initialValue": "/contact",
+        "hidden": "conditional",
+        "name": "secondCtaLink",
+        "type": "string",
+        "title": "Secondary Button Link"
+      },
+      {
+        "initialValue": "Trusted by 500+ locals",
+        "hidden": "conditional",
+        "name": "socialProofText",
+        "type": "string"
+      }
+    ],
+    "name": "hero",
+    "type": "object",
+    "title": "Hero Section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "heading",
+        "type": "string"
+      },
+      {
+        "description": "A short tagline or subtitle",
+        "name": "subheading",
+        "type": "string"
+      },
+      {
+        "rows": 5,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "About Image"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string",
+                "title": "Feature Title"
+              },
+              {
+                "rows": 2,
+                "name": "description",
+                "type": "text",
+                "title": "Feature Description"
+              },
+              {
+                "description": "Lucide icon name (e.g., \"Shield\", \"Clock\", \"Award\")",
+                "name": "icon",
+                "type": "string",
+                "title": "Icon Name"
+              }
+            ],
+            "type": "object",
+            "name": "feature"
+          }
+        ],
+        "name": "features",
+        "type": "array",
+        "title": "Key Features"
+      },
+      {
+        "name": "ctaText",
+        "type": "string",
+        "title": "CTA Button Text"
+      },
+      {
+        "name": "ctaLink",
+        "type": "string",
+        "title": "CTA Link"
+      }
+    ],
+    "name": "aboutUs",
+    "type": "object",
+    "title": "About Us Section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "Page Title"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "name": "hero",
+        "type": "hero",
+        "title": "Hero Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Trusted by Thousands",
+            "name": "heading",
+            "type": "string"
+          },
+          {
+            "rows": 2,
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 4
+                  }
+                ],
+                "level": "warning",
+                "message": "Best with 3-4 stats"
+              }
+            ],
+            "of": [
+              {
+                "fields": [
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          }
+                        ],
+                        "level": "error"
+                      }
+                    ],
+                    "name": "value",
+                    "type": "string"
+                  },
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          }
+                        ],
+                        "level": "error"
+                      }
+                    ],
+                    "name": "label",
+                    "type": "string"
+                  },
+                  {
+                    "description": "e.g., Users, Star, Award, Shield",
+                    "name": "icon",
+                    "type": "string",
+                    "title": "Icon (Lucide)"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "stats",
+            "type": "array"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "statsSection",
+        "type": "object"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "hidden": "conditional",
+        "name": "aboutUs",
+        "type": "aboutUs",
+        "title": "About Us Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "How It Works",
+            "name": "heading",
+            "type": "string"
+          },
+          {
+            "rows": 2,
+            "name": "description",
+            "type": "text"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 4
+                  }
+                ],
+                "level": "warning",
+                "message": "Best with 3-4 steps"
+              }
+            ],
+            "of": [
+              {
+                "fields": [
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          }
+                        ],
+                        "level": "error"
+                      }
+                    ],
+                    "name": "title",
+                    "type": "string",
+                    "title": "Step Title"
+                  },
+                  {
+                    "rows": 3,
+                    "name": "description",
+                    "type": "text"
+                  },
+                  {
+                    "description": "e.g., Phone, Calendar, Wrench, CheckCircle",
+                    "name": "icon",
+                    "type": "string",
+                    "title": "Icon (Lucide)"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "steps",
+            "type": "array"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "processSection",
+        "type": "object",
+        "title": "Process/How It Works Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Trusted by Local Homeowners",
+            "name": "heading",
+            "type": "string",
+            "title": "Section Heading"
+          },
+          {
+            "rows": 3,
+            "name": "description",
+            "type": "text",
+            "title": "Section Description"
+          },
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative Text"
+              }
+            ],
+            "name": "mainImage",
+            "type": "image",
+            "title": "Feature Image (Optional)"
+          },
+          {
+            "of": [
+              {
+                "type": "testimonial",
+                "title": "Testimonial Entry"
+              }
+            ],
+            "name": "testimonials",
+            "type": "array",
+            "title": "Client Reviews"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "testimonialSection",
+        "type": "object",
+        "title": "Testimonials Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "hidden": "conditional",
+        "name": "pricing",
+        "type": "pricing",
+        "title": "Pricing Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Your Ultimate Satisfaction Assured",
+            "name": "kicker",
+            "type": "string",
+            "title": "Small Top Text"
+          },
+          {
+            "initialValue": "Ask About Our Hero Guarantees",
+            "name": "heading",
+            "type": "string",
+            "title": "Main Heading"
+          },
+          {
+            "rows": 3,
+            "name": "intro",
+            "type": "text",
+            "title": "Intro Paragraph"
+          },
+          {
+            "description": "Example: \"Australians\"",
+            "name": "highlightWord",
+            "type": "string",
+            "title": "Heading Highlight Word (Optional)"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 4
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "of": [
+              {
+                "fields": [
+                  {
+                    "validation": [
+                      {
+                        "rules": [
+                          {
+                            "flag": "presence",
+                            "constraint": "required"
+                          }
+                        ],
+                        "level": "error"
+                      }
+                    ],
+                    "name": "title",
+                    "type": "string"
+                  },
+                  {
+                    "rows": 3,
+                    "name": "description",
+                    "type": "text"
+                  },
+                  {
+                    "of": [
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "name": "points",
+                    "type": "array",
+                    "title": "Bullet Points"
+                  },
+                  {
+                    "description": "BadgeDollarSign, ShieldCheck, Home, etc.",
+                    "name": "icon",
+                    "type": "string",
+                    "title": "Icon Name (Lucide)"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "items",
+            "type": "array",
+            "title": "Guarantee Items"
+          },
+          {
+            "initialValue": "Financing",
+            "name": "primaryButtonText",
+            "type": "string"
+          },
+          {
+            "initialValue": "/contact",
+            "name": "primaryButtonLink",
+            "type": "string"
+          },
+          {
+            "initialValue": "Frequently Asked Questions",
+            "name": "secondaryButtonText",
+            "type": "string"
+          },
+          {
+            "initialValue": "/faq",
+            "name": "secondaryButtonLink",
+            "type": "string"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "guaranteesSection",
+        "type": "object"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "initialValue": "Frequently Asked Questions",
+            "name": "title",
+            "type": "string",
+            "title": "Section Title"
+          },
+          {
+            "rows": 3,
+            "name": "description",
+            "type": "text",
+            "title": "Intro Description"
+          },
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "name": "question",
+                    "type": "string"
+                  },
+                  {
+                    "rows": 4,
+                    "name": "answer",
+                    "type": "text"
+                  }
+                ],
+                "type": "object"
+              }
+            ],
+            "name": "items",
+            "type": "array",
+            "title": "Questions"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "faq",
+        "type": "object",
+        "title": "FAQ Section"
+      },
+      {
+        "options": {
+          "collapsible": true,
+          "collapsed": true
+        },
+        "fields": [
+          {
+            "name": "heading",
+            "type": "string"
+          },
+          {
+            "name": "lastUpdated",
+            "type": "date"
+          },
+          {
+            "of": [
+              {
+                "marks": {
+                  "annotations": [
+                    {
+                      "i18nTitleKey": "inputs.portable-text.annotation.link",
+                      "options": {
+                        "modal": {
+                          "type": "popover"
+                        }
+                      },
+                      "fields": [
+                        {
+                          "validation": [
+                            {
+                              "rules": [
+                                {
+                                  "flag": "uri",
+                                  "constraint": {
+                                    "options": {
+                                      "scheme": [
+                                        "/^http$/",
+                                        "/^https$/",
+                                        "/^tel$/",
+                                        "/^mailto$/"
+                                      ],
+                                      "allowRelative": true,
+                                      "relativeOnly": false,
+                                      "allowCredentials": false
+                                    }
+                                  }
+                                }
+                              ],
+                              "level": "error"
+                            }
+                          ],
+                          "description": "A valid web, email, phone, or relative link.",
+                          "name": "href",
+                          "type": "url",
+                          "title": "Link"
+                        }
+                      ],
+                      "name": "link",
+                      "type": "object"
+                    }
+                  ],
+                  "decorators": [
+                    {
+                      "value": "strong",
+                      "title": "Strong"
+                    },
+                    {
+                      "value": "em",
+                      "title": "Italic"
+                    },
+                    {
+                      "value": "code",
+                      "title": "Code"
+                    },
+                    {
+                      "value": "underline",
+                      "title": "Underline"
+                    },
+                    {
+                      "value": "strike-through",
+                      "title": "Strike"
+                    }
+                  ]
+                },
+                "lists": [
+                  {
+                    "value": "bullet",
+                    "title": "Bulleted list"
+                  },
+                  {
+                    "value": "number",
+                    "title": "Numbered list"
+                  }
+                ],
+                "styles": [
+                  {
+                    "value": "normal",
+                    "title": "Normal"
+                  },
+                  {
+                    "value": "h1",
+                    "title": "Heading 1"
+                  },
+                  {
+                    "value": "h2",
+                    "title": "Heading 2"
+                  },
+                  {
+                    "value": "h3",
+                    "title": "Heading 3"
+                  },
+                  {
+                    "value": "h4",
+                    "title": "Heading 4"
+                  },
+                  {
+                    "value": "h5",
+                    "title": "Heading 5"
+                  },
+                  {
+                    "value": "h6",
+                    "title": "Heading 6"
+                  },
+                  {
+                    "value": "blockquote",
+                    "title": "Quote"
+                  }
+                ],
+                "of": [],
+                "type": "block"
+              }
+            ],
+            "name": "body",
+            "type": "array",
+            "title": "Content"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "content",
+        "type": "object",
+        "title": "Legal / Rich Text Content"
+      }
+    ],
+    "name": "page",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Service name (3-60 characters)",
+        "name": "title",
+        "type": "string",
+        "title": "Service Title"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "name": "shortDescription",
+        "type": "text",
+        "title": "Short Description (For Cards)"
+      },
+      {
+        "description": "e.g. Wrench, Droplets, Thermometer, Wind",
+        "name": "icon",
+        "type": "string",
+        "title": "Icon Name (Lucide)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt text"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "rows": 3,
+        "description": "1–2 line overview that shows at the top of the detail page.",
+        "name": "intro",
+        "type": "text",
+        "title": "Intro Paragraph"
+      },
+      {
+        "description": "Key points like “24/7 support”, “Licensed technicians”, etc.",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "highlights",
+        "type": "array",
+        "title": "Highlights (Bullet Points)"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string",
+                "title": "Benefit Title"
+              },
+              {
+                "rows": 3,
+                "name": "description",
+                "type": "text",
+                "title": "Benefit Description"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "benefits",
+        "type": "array",
+        "title": "Key Benefits Cards"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "question",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "answer",
+                "type": "text"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "serviceFaq",
+        "type": "array",
+        "title": "Service FAQs"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "content",
+        "type": "array",
+        "title": "Full Content"
+      }
+    ],
+    "name": "service",
+    "type": "document",
+    "title": "Services"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 2
+              },
+              {
+                "flag": "max",
+                "constraint": 50
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "author",
+        "type": "string",
+        "title": "Client Name"
+      },
+      {
+        "initialValue": "Homeowner",
+        "name": "role",
+        "type": "string",
+        "title": "Role / Location"
+      },
+      {
+        "rows": 3,
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "initialValue": 5,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              },
+              {
+                "flag": "max",
+                "constraint": 5
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "rating",
+        "type": "number",
+        "title": "Stars (1-5)"
+      }
+    ],
+    "name": "testimonial",
+    "type": "object",
+    "title": "Testimonial Entry"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Rooters",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "brandName",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "initialValue": "Your trusted partner for eco-friendly plumbing and HVAC solutions.",
+        "name": "brandDescription",
+        "type": "text"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "+1 (555) 123-4567",
+            "name": "phoneDisplay",
+            "type": "string",
+            "title": "Phone (Display)"
+          },
+          {
+            "initialValue": "tel:+15551234567",
+            "name": "phoneHref",
+            "type": "string",
+            "title": "Phone Link (tel:)"
+          },
+          {
+            "initialValue": "hello@rooters.com",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "initialValue": "123 Green Lane",
+            "name": "addressLine1",
+            "type": "string"
+          },
+          {
+            "initialValue": "Cityville, ST 12345",
+            "name": "addressLine2",
+            "type": "string"
+          },
+          {
+            "initialValue": "Available 24/7 for emergencies",
+            "name": "emergencyNote",
+            "type": "string"
+          }
+        ],
+        "name": "contact",
+        "type": "object",
+        "title": "Contact Details"
+      },
+      {
+        "initialValue": [
+          {
+            "label": "Mon - Fri",
+            "value": "8am - 6pm"
+          },
+          {
+            "label": "Sat - Sun",
+            "value": "9am - 3pm"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "name": "value",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "hoursItem"
+          }
+        ],
+        "name": "hours",
+        "type": "array",
+        "title": "Business Hours"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "city",
+                "type": "string"
+              },
+              {
+                "name": "region",
+                "type": "string",
+                "title": "Region/State"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "serviceAreas",
+        "type": "array"
+      },
+      {
+        "initialValue": [
+          {
+            "label": "Home",
+            "href": "/"
+          },
+          {
+            "label": "About",
+            "href": "/about"
+          },
+          {
+            "label": "Services",
+            "href": "/services"
+          },
+          {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "label",
+                "type": "string"
+              },
+              {
+                "name": "href",
+                "type": "string"
+              }
+            ],
+            "type": "object",
+            "name": "footerLink"
+          }
+        ],
+        "name": "footerLinks",
+        "type": "array",
+        "title": "Footer Quick Links"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Facebook",
+                      "value": "facebook"
+                    },
+                    {
+                      "title": "Instagram",
+                      "value": "instagram"
+                    },
+                    {
+                      "title": "LinkedIn",
+                      "value": "linkedin"
+                    }
+                  ]
+                },
+                "name": "platform",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "URL"
+              }
+            ],
+            "type": "object",
+            "name": "social"
+          }
+        ],
+        "name": "socials",
+        "type": "array",
+        "title": "Social Links"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "Get in Touch",
+            "name": "infoHeading",
+            "type": "string",
+            "title": "Left Side Heading"
+          },
+          {
+            "rows": 3,
+            "initialValue": "Fill out the form or call us directly.",
+            "name": "infoText",
+            "type": "text",
+            "title": "Left Side Text"
+          },
+          {
+            "initialValue": "Send us a message",
+            "name": "formHeading",
+            "type": "string"
+          },
+          {
+            "initialValue": "Name",
+            "name": "nameLabel",
+            "type": "string"
+          },
+          {
+            "initialValue": "Phone",
+            "name": "phoneLabel",
+            "type": "string"
+          },
+          {
+            "initialValue": "Email",
+            "name": "emailLabel",
+            "type": "string"
+          },
+          {
+            "initialValue": "Message",
+            "name": "messageLabel",
+            "type": "string"
+          },
+          {
+            "initialValue": "John Doe",
+            "name": "namePlaceholder",
+            "type": "string"
+          },
+          {
+            "initialValue": "(555) 000-0000",
+            "name": "phonePlaceholder",
+            "type": "string"
+          },
+          {
+            "initialValue": "john@example.com",
+            "name": "emailPlaceholder",
+            "type": "string"
+          },
+          {
+            "initialValue": "How can we help?",
+            "name": "messagePlaceholder",
+            "type": "string"
+          },
+          {
+            "initialValue": "Send Message",
+            "name": "submitText",
+            "type": "string",
+            "title": "Submit Button Text"
+          },
+          {
+            "initialValue": "We'll get back to you soon.",
+            "name": "disclaimer",
+            "type": "string",
+            "title": "Form Disclaimer"
+          }
+        ],
+        "name": "contactPage",
+        "type": "object",
+        "title": "Contact Page Content"
+      },
+      {
+        "initialValue": "© 2025 Rooters. All rights reserved.",
+        "name": "footerLegal",
+        "type": "string",
+        "title": "Footer Legal Text"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Offers To Elevate Your Home Comfort",
+        "name": "heading",
+        "type": "string",
+        "title": "Section Heading"
+      },
+      {
+        "initialValue": "Elevating Comfort, Maximizing Savings",
+        "name": "subheading",
+        "type": "string",
+        "title": "Subheading (Small Tag)"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "description": "e.g. \"Before 2PM\" or \"$\"",
+                "name": "currency",
+                "type": "string",
+                "title": "Top Text (Orange)"
+              },
+              {
+                "description": "The main number or text. e.g. \"2PM\", \"50\", \"120\"",
+                "name": "price",
+                "type": "string",
+                "title": "Middle Text (Big Orange)"
+              },
+              {
+                "description": "e.g. \"OFF\", \"/month\" (Optional)",
+                "name": "frequency",
+                "type": "string",
+                "title": "Right Side Text (Orange)"
+              },
+              {
+                "description": "e.g. \"Same-Day Repair\" or \"HVAC Repair\"",
+                "name": "title",
+                "type": "string",
+                "title": "Offer Title (Purple)"
+              },
+              {
+                "description": "e.g. \"(over $250)\"",
+                "name": "description",
+                "type": "string",
+                "title": "Sub Text"
+              },
+              {
+                "description": "Small text at the bottom. e.g. \"Limit one per household...\"",
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "features",
+                "type": "array",
+                "title": "Fine Print / Disclaimer"
+              },
+              {
+                "initialValue": "CLAIM COUPON",
+                "name": "ctaText",
+                "type": "string",
+                "title": "Button Text"
+              },
+              {
+                "initialValue": "/contact",
+                "name": "ctaLink",
+                "type": "string",
+                "title": "Button Link"
+              },
+              {
+                "initialValue": false,
+                "name": "isPopular",
+                "type": "boolean",
+                "title": "Highlight this Coupon?"
+              }
+            ],
+            "type": "object",
+            "title": "Coupon"
+          }
+        ],
+        "name": "plans",
+        "type": "array",
+        "title": "Coupons / Offers"
+      }
+    ],
+    "name": "pricing",
+    "type": "object",
+    "title": "Discount / Offers Section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published at"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative Text"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image",
+        "title": "Main image"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Short summary",
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          },
+          {
+            "type": "image"
+          }
+        ],
+        "name": "body",
+        "type": "array"
+      }
+    ],
+    "name": "post",
+    "type": "document",
+    "title": "Blog Post"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string",
+        "title": "Full Name"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "role",
+        "type": "string",
+        "title": "Job Title/Role"
+      },
+      {
+        "rows": 4,
+        "name": "bio",
+        "type": "text"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image",
+        "title": "Photo"
+      },
+      {
+        "initialValue": 0,
+        "description": "Lower numbers appear first",
+        "name": "order",
+        "type": "number",
+        "title": "Display Order"
+      }
+    ],
+    "name": "teamMember",
+    "type": "document"
+  }
+]
